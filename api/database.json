@@ -1,0 +1,33 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "wcdoster",
+      "email": "wcdoster@gmail.com",
+      "password": "password"
+    }
+  ],
+  "subscribedPodcasts": [
+    {
+      "id": "1",
+      "userId": "1",
+      "collectionId": "367330921"
+    }
+  ],
+  "finishedPodcasts": [
+    {
+      "id": "1",
+      "userId": "1",
+      "title": "MBMBaM 409: Limp Bizkit Skank Boy",
+      "collectionId": "367330921"
+    }
+  ],
+  "inProgressPodcasts": [
+    {
+      "id": "1",
+      "userId": "1",
+      "title": "MBMBaM 408: Come and Get It!",
+      "collectionId": "367330921"
+    }
+  ]
+}
