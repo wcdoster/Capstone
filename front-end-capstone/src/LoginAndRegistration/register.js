@@ -68,7 +68,7 @@ class Registration extends Component {
                             sessionStorage.setItem("userId", userSet)
                             localStorage.clear()
 
-                            // this.props.setActiveUser(user.id)
+                            this.props.setActiveUser(user)
                             // this.props.setView("home")
                         })
                 }

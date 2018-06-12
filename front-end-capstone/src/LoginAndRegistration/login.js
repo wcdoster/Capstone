@@ -24,7 +24,7 @@ class Login extends Component {
 
                     sessionStorage.setItem("userId", user.id)
                 }
-                this.props.setActiveUser(user.id)
+                this.props.setActiveUser(user)
                 // this.props.setView("home")
             })
     }.bind(this)

@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 class Podcast extends Component {
     render() {
         return(
-            <div>
+            <div id={this.props.collectionId} onClick={this.props.podcastClick}>
                 <img src={this.props.image} alt={this.props.name} />
-                <a id="podcast--list--name">{this.props.name}</a>
+                <a>{this.props.name}</a>
             </div>
         )
     }
