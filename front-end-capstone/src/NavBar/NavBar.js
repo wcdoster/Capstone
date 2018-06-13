@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 class NavBar extends Component {
     state = {
+        userName: this.props.userName
     }
 
     searchSubmit = function (e) {
@@ -25,12 +26,12 @@ class NavBar extends Component {
         } else {
             return (
                 <nav>
-                    <a id="userPage" onClick={this.props.onClickNav}>{this.props.userName}</a>
+                    <a id="userPage" onClick={this.props.onClickNav}>{this.state.userName}</a>
                     <form onSubmit={this.searchSubmit}>
                         <input id="searchValue" type="text" placeholder="search" value={this.props.searchValue} onChange={this.props.handleFormFieldChange}/>
                         <button type="submit">Submit</button>
                     </form>
-                    <a id="logout" onClick={this.props.onClickNav}>LogOut</a>
+                    <a id="logout" onClick={this.props.logout}>LogOut</a>
                 </nav>
             )
         }

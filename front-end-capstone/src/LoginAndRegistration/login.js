@@ -22,7 +22,7 @@ class Login extends Component {
                 } else if (this.state.password === user.password) {
                     const remember = document.getElementById("checkbox")
 
-                    sessionStorage.setItem("userId", user.id)
+                    localStorage.setItem("userId", user.id)
                 }
                 this.props.setActiveUser(user)
                 // this.props.setView("home")

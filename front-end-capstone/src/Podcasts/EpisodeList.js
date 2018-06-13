@@ -5,17 +5,16 @@ class EpisodeList extends Component {
     
     uniqueKey = 1
 
-    // check = function(string) {
-    //     let x = new RegExp("/(<[^>]*>)/ig")
-    //     let target = string.toString().replace(x,"");
-    //     console.log(target)
-    // }.bind(this)
+    check = function(string) {
+        let p = string.replace(/<[^>]*>/gi, '');
+        return p
+    }.bind(this)
     
     render(){
         return(
             <div>
-                {this.props.episodes.map(p => (
-                    <Episode click={this.props.click} description={p["description"]["#cdata-section"]} episodeName={p.title["#text"]}  key={this.uniqueKey++} />
+                {this.props.episodes.slice(0, 10).map(p => (
+                    <Episode click={this.props.click} episodeName={p.title["#text"]}  key={this.uniqueKey++} />
                 ))}
             </div>
         )
@@ -23,3 +22,6 @@ class EpisodeList extends Component {
 }
 
 export default EpisodeList
+
+
+// description={this.check(p["description"]["#cdata-section"])}

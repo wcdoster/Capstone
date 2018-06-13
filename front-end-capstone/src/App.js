@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import Login from './LoginAndRegistration/login'
 import NavBar from './NavBar/NavBar'
 import PodcastList from './Podcasts/PodcastList'
-import EpisodeList from './Podcasts/EpisodeList'
+import PodcastPage from './Podcasts/PodcastPage'
 import MediaPlayer from './Podcasts/PodcastPlayer'
-import Registration from './LoginAndRegistration/register';
+import LoginAndRegistration from './LoginAndRegistration/LoginAndRegistration'
+import HomePage from './HomePage/HomePage'
 
 const $ = require('jquery')
 
@@ -22,6 +22,22 @@ class App extends Component {
     mediaUrl: "",
     mediaType: "",
     imageUrl: ""
+  }
+
+  componentDidMount() {
+    const userId = localStorage.getItem("userId")
+    if(userId) {
+      fetch(`http://localhost:8088/users?id=${userId}`)
+      .then(r=>r.json())
+      .then(result => {
+        const thisUser = result[0]
+        this.setState({
+         currentUser: thisUser.id,
+         username: thisUser.username
+        })
+        // this.setView("home")
+    })
+    }
   }
 
   xmlToJson = function (xml) {
@@ -65,6 +81,15 @@ class App extends Component {
       currentUser: user.id,
       userName: user.username
     })
+  }.bind(this)
+
+  logout = function() {
+    this.setState({
+      currentUser: "",
+      userName: ""
+    })
+    localStorage.clear()
+    this.setView("login")
   }.bind(this)
 
 
@@ -139,12 +164,14 @@ class App extends Component {
       case "mediaPlayer":
         return <MediaPlayer imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} />
       case "podcastPage":
-        return <EpisodeList episodes={this.state.currentPodcast.rss.channel.item} click={this.playButtonClick} />
+        return <PodcastPage episodes={this.state.currentPodcast.rss.channel.item} click={this.playButtonClick} name={this.state.currentItunesInformation.results[0].collectionName} currentUser={this.state.currentUser} collectionId={this.state.currentItunesInformation.results[0].collectionId}/>
       case "searchResults":
         return <PodcastList searchResults={this.state.searchResults} setView={this.setView} podcastClick={this.podcastClick} />
       case "login":
-      default:
-        return <Login setActiveUser={this.setActiveUser} /> 
+        return <LoginAndRegistration setActiveUser={this.setActiveUser} /> 
+      case "home":
+        default:
+        return <HomePage podcastClick={this.podcastClick}/>
     }
   }.bind(this)
 
@@ -162,6 +189,7 @@ class App extends Component {
           setSearchTerms={this.setSearchTerms}
           getSearchResults={this.getSearchResults}
           setView={this.setView}
+          logout={this.logout}
         />
 
         {this.showView()}
