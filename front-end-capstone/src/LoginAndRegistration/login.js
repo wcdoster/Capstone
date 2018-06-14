@@ -25,7 +25,7 @@ class Login extends Component {
                     localStorage.setItem("userId", user.id)
                 }
                 this.props.setActiveUser(user)
-                // this.props.setView("home")
+                this.props.setView("userPage")
             })
     }.bind(this)
 

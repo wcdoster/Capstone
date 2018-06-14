@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 
 class NavBar extends Component {
-    state = {
-        userName: this.props.userName
-    }
+    // state = {
+    //     userName: ""
+    // }
+
+    // componentDidMount() {
+    //     this.setState({
+    //         userName: this.props.userName
+    //     })
+    // }
 
     searchSubmit = function (e) {
         e.preventDefault()
@@ -26,7 +32,7 @@ class NavBar extends Component {
         } else {
             return (
                 <nav>
-                    <a id="userPage" onClick={this.props.onClickNav}>{this.state.userName}</a>
+                    <a id="userPage" onClick={this.props.onClickNav}>{this.props.userName}</a>
                     <form onSubmit={this.searchSubmit}>
                         <input id="searchValue" type="text" placeholder="search" value={this.props.searchValue} onChange={this.props.handleFormFieldChange}/>
                         <button type="submit">Submit</button>

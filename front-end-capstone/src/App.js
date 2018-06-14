@@ -6,6 +6,7 @@ import PodcastPage from './Podcasts/PodcastPage'
 import MediaPlayer from './Podcasts/PodcastPlayer'
 import LoginAndRegistration from './LoginAndRegistration/LoginAndRegistration'
 import HomePage from './HomePage/HomePage'
+import UserPage from './UserPage/UserPage'
 
 const $ = require('jquery')
 
@@ -21,24 +22,36 @@ class App extends Component {
     currentItunesInformation: {},
     mediaUrl: "",
     mediaType: "",
-    imageUrl: ""
+    imageUrl: "",
+    timestamp: Date.now()
   }
 
   componentDidMount() {
+    this.initialView()
     const userId = localStorage.getItem("userId")
-    if(userId) {
+    if (userId) {
       fetch(`http://localhost:8088/users?id=${userId}`)
-      .then(r=>r.json())
-      .then(result => {
-        const thisUser = result[0]
-        this.setState({
-         currentUser: thisUser.id,
-         username: thisUser.username
+        .then(r => r.json())
+        .then(result => {
+          const thisUser = result[0]
+          this.setState({
+            currentUser: thisUser.id,
+            userName: thisUser.username,
+            timestamp: Date.now()
+          })
+          // this.setView("home")
         })
-        // this.setView("home")
-    })
     }
   }
+
+  initialView = function () {
+    const userId = localStorage.getItem("userId")
+    if (userId) {
+      this.setView("userPage")
+    }else {
+      this.setView("home")
+    }
+  }.bind(this)
 
   xmlToJson = function (xml) {
     // Create the return object
@@ -83,7 +96,7 @@ class App extends Component {
     })
   }.bind(this)
 
-  logout = function() {
+  logout = function () {
     this.setState({
       currentUser: "",
       userName: ""
@@ -145,6 +158,11 @@ class App extends Component {
       })
   }.bind(this)
 
+  // userPagePlayClick = function(e) {
+  //   e.preventDefault
+  //   const currentEpisode = 
+  // }
+
 
   playButtonClick = function (e) {
     e.preventDefault
@@ -160,18 +178,20 @@ class App extends Component {
   }.bind(this)
 
   showView = function () {
+    
     switch (this.state.view) {
       case "mediaPlayer":
         return <MediaPlayer imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} />
       case "podcastPage":
-        return <PodcastPage episodes={this.state.currentPodcast.rss.channel.item} click={this.playButtonClick} name={this.state.currentItunesInformation.results[0].collectionName} currentUser={this.state.currentUser} collectionId={this.state.currentItunesInformation.results[0].collectionId}/>
+        return <PodcastPage episodes={this.state.currentPodcast.rss.channel.item} click={this.playButtonClick} name={this.state.currentItunesInformation.results[0].collectionName} currentUser={this.state.currentUser} collectionId={this.state.currentItunesInformation.results[0].collectionId} />
       case "searchResults":
         return <PodcastList searchResults={this.state.searchResults} setView={this.setView} podcastClick={this.podcastClick} />
       case "login":
-        return <LoginAndRegistration setActiveUser={this.setActiveUser} /> 
+        return <LoginAndRegistration setActiveUser={this.setActiveUser} setView={this.setView} />
+      case "userPage":
+        return <UserPage key={this.state.timestamp} currentUser={this.state.currentUser} podcastClick={this.podcastClick} xmlToJson={this.xmlToJson} />
       case "home":
-        default:
-        return <HomePage podcastClick={this.podcastClick}/>
+        return <HomePage podcastClick={this.podcastClick} />
     }
   }.bind(this)
 

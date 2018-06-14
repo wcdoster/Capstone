@@ -1,35 +1,12 @@
 import React, { Component } from 'react'
-import Podcast from '../Podcasts/PodcastElement'
+import TopList from './TopList'
 
 class HomePage extends Component {
-
-    uniqueKey = 0
-
-    state = {
-        podcastList: []
-    }
-
-    componentDidMount() {
-        fetch('https://rss.itunes.apple.com/api/v1/us/podcasts/top-podcasts/all/25/explicit.json')
-            .then(r => r.json())
-            .then(x => {
-                const results = x.feed.results
-                console.log(results)
-                this.setState({
-                    podcastList: results
-                })
-            })
-    }
-
-
-
     render() {
-        return (
+        return(
             <div>
-                {this.state.podcastList.map(p => (
-                    <Podcast collectionId={p.id} name={p.name}
-                    image={p.artworkUrl100} podcastClick={this.props.podcastClick} key={this.uniqueKey++} />
-                ))}
+                <h2>Top Podcasts</h2>
+                <TopList podcastClick={this.props.podcastClick}/>
             </div>
         )
     }

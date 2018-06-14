@@ -6,7 +6,7 @@ class LoginAndRegistration extends Component {
     render() {
         return(
             <div>
-                <Login setActiveUser={this.props.setActiveUser}/>
+                <Login setActiveUser={this.props.setActiveUser} setView={this.props.setView}/>
                 <Registration setActiveUser={this.props.setActiveUser} />
             </div>
         )

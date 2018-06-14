@@ -12,6 +12,36 @@
       "id": "1",
       "userId": "1",
       "collectionId": "367330921"
+    },
+    {
+      "id": "2",
+      "userId": "1",
+      "collectionId": "173001861"
+    },
+    {
+      "userId": "1",
+      "collectionId": 1043699613,
+      "id": "XxobyEa"
+    },
+    {
+      "userId": "1",
+      "collectionId": 1200361736,
+      "id": "X1pxe5Z"
+    },
+    {
+      "userId": "1",
+      "collectionId": 917918570,
+      "id": "~ayB~Ue"
+    },
+    {
+      "userId": "1",
+      "collectionId": 360084272,
+      "id": "m_ZQ7zh"
+    },
+    {
+      "userId": "1",
+      "collectionId": 703889772,
+      "id": "78R0WTm"
     }
   ],
   "finishedPodcasts": [
@@ -19,7 +49,8 @@
       "id": "1",
       "userId": "1",
       "title": "MBMBaM 409: Limp Bizkit Skank Boy",
-      "collectionId": "367330921"
+      "collectionId": "367330921",
+      "rssFeed": "http://mbmbam.libsyn.com/rss"
     }
   ],
   "inProgressPodcasts": [
@@ -27,7 +58,8 @@
       "id": "1",
       "userId": "1",
       "title": "MBMBaM 408: Come and Get It!",
-      "collectionId": "367330921"
+      "collectionId": "367330921",
+      "rssFeed": "http://mbmbam.libsyn.com/rss"
     }
   ]
 }
