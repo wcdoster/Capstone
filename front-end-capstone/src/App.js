@@ -123,6 +123,16 @@ class App extends Component {
     this.setView(e.target.id)
   }.bind(this)
 
+  searchSubmit = function (e) {
+    e.preventDefault()
+    this.getSearchResults()
+    .then(()=>{
+      this.setView("searchResults")
+      this.setState({
+        searchValue: ""
+      })
+    })
+}.bind(this)
 
   getSearchResults = function () {
     const terms = this.state.searchValue.split(" ")
@@ -181,7 +191,7 @@ class App extends Component {
     
     switch (this.state.view) {
       case "mediaPlayer":
-        return <MediaPlayer imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} />
+        return <MediaPlayer setView={this.setView} imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} />
       case "podcastPage":
         return <PodcastPage episodes={this.state.currentPodcast.rss.channel.item} click={this.playButtonClick} name={this.state.currentItunesInformation.results[0].collectionName} currentUser={this.state.currentUser} collectionId={this.state.currentItunesInformation.results[0].collectionId} />
       case "searchResults":
@@ -206,6 +216,7 @@ class App extends Component {
           searchValue={this.state.searchValue}
           handleFormFieldChange={this.handleFormFieldChange}
           onClickNav={this.onClickNav}
+          searchSubmit={this.searchSubmit}
           setSearchTerms={this.setSearchTerms}
           getSearchResults={this.getSearchResults}
           setView={this.setView}

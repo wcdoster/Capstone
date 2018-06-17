@@ -12,6 +12,8 @@ class UserPage extends Component {
         inProgressPodcasts: []
     }
 
+
+
     componentDidMount() {
         fetch(`http://localhost:8088/subscribedPodcasts?userId=${this.props.currentUser}`)
             .then(r => r.json())
@@ -53,15 +55,25 @@ class UserPage extends Component {
             })
         fetch(`http://localhost:8088/inProgressPodcasts?userId=${this.props.currentUser}`)
             .then(r => r.json())
-            .then(result => {
-                this.setState({
-                    inProgressPodcasts: result
+            .then(results => {
+                const podcastList = []
+                results.forEach(x => {
+                    $.get(`${x.rssFeed}?format=xml`, p => {
+                        const eps = this.props.xmlToJson(p)
+                        console.log(eps)
+                        const episodes = eps.rss.channel.item
+                        episodes.forEach(episode => {
+                            if (episode.title["#text"] === x.title) {
+                                podcastList.push(episode)
+                                this.setState({
+                                    inProgressPodcasts: podcastList
+                                })
+                            }
+                        })
+                    }
+                    )
                 })
             })
-    }
-
-    playClick = function () {
-        
     }
 
     render() {
@@ -69,10 +81,11 @@ class UserPage extends Component {
             <div>
                 <h2>Your Podcasts</h2>
                 <PodcastList searchResults={this.state.subscribedPodcasts} podcastClick={this.props.podcastClick} />
+                <h2>Most Recent Episodes</h2>
+                <EpisodeList hidden={true} click={this.props.click} episodes={this.state.finishedPodcasts} />
                 <h2>Top Podcasts</h2>
                 <TopList podcastClick={this.props.podcastClick} />
-                {/* <EpisodeList click={this.props.click} episodes={this.state.finishedPodcasts} /> */}
-            </div>
+            </div >
         )
     }
 }

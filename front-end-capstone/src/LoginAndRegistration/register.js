@@ -69,7 +69,7 @@ class Registration extends Component {
                             localStorage.clear()
 
                             this.props.setActiveUser(user)
-                            // this.props.setView("home")
+                            this.props.setView("userPage")
                         })
                 }
             })

@@ -5,7 +5,8 @@ import EpisodeList from './EpisodeList'
 class PodcastPage extends Component {
 
     state = {
-        subscribed: ""
+        subscribed: "",
+        hidden: false
     }
 
     componentDidMount() {
@@ -39,13 +40,12 @@ class PodcastPage extends Component {
         })
             .then(() => {
                 this.setState({
-                    subscribed: "unsubscribed"
+                    subscribed: "unsubscribe"
                 })
             })
     }.bind(this)
 
     unsubscribeClick = function () {
-        console.log(this.props.collectionId)
         fetch(`http://localhost:8088/subscribedPodcasts?collectionId=${this.props.collectionId}`)
             .then(r => r.json())
             .then(result => {
@@ -74,7 +74,7 @@ class PodcastPage extends Component {
             <div>
                 <h2>{this.props.name}</h2>
                 <button onClick={this.clickFunction} >{this.state.subscribed}</button>
-                <EpisodeList episodes={this.props.episodes} click={this.props.click} />
+                <EpisodeList hidden={this.state.hidden} episodes={this.props.episodes} click={this.props.click} />
             </div >
         )
     }

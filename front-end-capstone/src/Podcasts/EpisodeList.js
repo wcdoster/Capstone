@@ -14,7 +14,7 @@ class EpisodeList extends Component {
         return(
             <div>
                 {this.props.episodes.slice(0, 10).map(p => (
-                    <Episode click={this.props.click} episodeName={p.title["#text"]}  key={this.uniqueKey++} />
+                    <Episode hidden={this.props.hidden} click={this.props.click} episodeName={p.title["#text"]}  key={this.uniqueKey++} />
                 ))}
             </div>
         )

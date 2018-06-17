@@ -1,28 +1,13 @@
 import React, { Component } from 'react'
 
 class NavBar extends Component {
-    // state = {
-    //     userName: ""
-    // }
-
-    // componentDidMount() {
-    //     this.setState({
-    //         userName: this.props.userName
-    //     })
-    // }
-
-    searchSubmit = function (e) {
-        e.preventDefault()
-        this.props.getSearchResults()
-        .then(this.props.setView("searchResults"))
-    }.bind(this)
 
     render() {
         if(this.props.currentUser === ""){
             return(
                 <nav>
                     <a id="home" onClick={this.props.onClickNav}>Home</a>
-                    <form onSubmit={this.searchSubmit}>
+                    <form onSubmit={this.props.searchSubmit}>
                         <input id="searchValue" type="text" placeholder="search" value={this.props.searchValue} onChange={this.props.handleFormFieldChange}/>
                         <button type="submit">Submit</button>
                     </form>
@@ -33,7 +18,7 @@ class NavBar extends Component {
             return (
                 <nav>
                     <a id="userPage" onClick={this.props.onClickNav}>{this.props.userName}</a>
-                    <form onSubmit={this.searchSubmit}>
+                    <form onSubmit={this.props.searchSubmit}>
                         <input id="searchValue" type="text" placeholder="search" value={this.props.searchValue} onChange={this.props.handleFormFieldChange}/>
                         <button type="submit">Submit</button>
                     </form>
