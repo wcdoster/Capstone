@@ -48,7 +48,7 @@ class App extends Component {
     const userId = localStorage.getItem("userId")
     if (userId) {
       this.setView("userPage")
-    }else {
+    } else {
       this.setView("home")
     }
   }.bind(this)
@@ -102,7 +102,7 @@ class App extends Component {
       userName: ""
     })
     localStorage.clear()
-    this.setView("login")
+    this.setView("home")
   }.bind(this)
 
 
@@ -126,13 +126,13 @@ class App extends Component {
   searchSubmit = function (e) {
     e.preventDefault()
     this.getSearchResults()
-    .then(()=>{
-      this.setView("searchResults")
-      this.setState({
-        searchValue: ""
+      .then(() => {
+        this.setView("searchResults")
+        this.setState({
+          searchValue: ""
+        })
       })
-    })
-}.bind(this)
+  }.bind(this)
 
   getSearchResults = function () {
     const terms = this.state.searchValue.split(" ")
@@ -188,7 +188,7 @@ class App extends Component {
   }.bind(this)
 
   showView = function () {
-    
+
     switch (this.state.view) {
       case "mediaPlayer":
         return <MediaPlayer setView={this.setView} imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} />
@@ -196,8 +196,8 @@ class App extends Component {
         return <PodcastPage episodes={this.state.currentPodcast.rss.channel.item} click={this.playButtonClick} name={this.state.currentItunesInformation.results[0].collectionName} currentUser={this.state.currentUser} collectionId={this.state.currentItunesInformation.results[0].collectionId} />
       case "searchResults":
         return <PodcastList searchResults={this.state.searchResults} setView={this.setView} podcastClick={this.podcastClick} />
-      case "login":
-        return <LoginAndRegistration setActiveUser={this.setActiveUser} setView={this.setView} />
+      // case "login":
+      //   return <LoginAndRegistration setActiveUser={this.setActiveUser} setView={this.setView} />
       case "userPage":
         return <UserPage key={this.state.timestamp} currentUser={this.state.currentUser} podcastClick={this.podcastClick} xmlToJson={this.xmlToJson} />
       case "home":
@@ -221,9 +221,13 @@ class App extends Component {
           getSearchResults={this.getSearchResults}
           setView={this.setView}
           logout={this.logout}
+          setActiveUser={this.setActiveUser}
+          setView={this.setView}
         />
 
-        {this.showView()}
+        <div id="content">
+          {this.showView()}
+        </div>
       </div >
     )
   }

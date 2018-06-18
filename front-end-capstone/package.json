@@ -4,11 +4,14 @@
   "private": true,
   "dependencies": {
     "bloomer": "^0.6.3",
+    "bootstrap": "^4.1.1",
     "bulma": "^0.7.1",
     "jquery": "^3.3.1",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "react": "^16.4.1",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
+    "reactstrap": "^6.1.0",
     "xml-js": "^1.6.4"
   },
   "scripts": {

@@ -17,6 +17,18 @@
       "email": "matt@matt.matt",
       "password": "matt",
       "id": "_zhZbKA"
+    },
+    {
+      "username": "jess",
+      "email": "jess@jess",
+      "password": "password",
+      "id": "e5t5R6T"
+    },
+    {
+      "username": "testing",
+      "email": "testing",
+      "password": "password",
+      "id": "1rzlz3d"
     }
   ],
   "subscribedPodcasts": [
@@ -59,6 +71,26 @@
       "userId": "_zhZbKA",
       "collectionId": 360084272,
       "id": "8q0Tf3s"
+    },
+    {
+      "userId": "e5t5R6T",
+      "collectionId": 1074507850,
+      "id": "DN7PUaR"
+    },
+    {
+      "userId": "e5t5R6T",
+      "collectionId": 79687345,
+      "id": "brPKkAa"
+    },
+    {
+      "userId": "1rzlz3d",
+      "collectionId": 201671138,
+      "id": "VJCFR75"
+    },
+    {
+      "userId": "1rzlz3d",
+      "collectionId": 941907967,
+      "id": "guJbl~s"
     }
   ],
   "finishedPodcasts": [

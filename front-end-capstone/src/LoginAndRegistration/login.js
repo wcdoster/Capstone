@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Form, FormControl, Button } from 'react-bootstrap'
+import './login.css'
 
 class Login extends Component {
     state = {
@@ -37,23 +39,23 @@ class Login extends Component {
 
     render () {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <Form>
 
-                <input type="text"
+                <FormControl type="text"
                 id="username"
                 value={this.state.username}
                 onChange={this.handleFormFieldChange}
                 placeholder="username" />
 
-                <input type="text"
+                <FormControl type="text"
                 id="password"
                 value={this.state.password}
                 onChange={this.handleFormFieldChange}
                 placeholder="password" />
 
-                <button id="button--login">Submit</button>
+                <Button onClick={this.handleSubmit} id="button--login">Submit</Button>
 
-            </form>
+            </Form>
         )
     }
 }

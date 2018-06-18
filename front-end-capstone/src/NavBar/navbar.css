@@ -1,0 +1,23 @@
+Nav{
+    font-size: 1.2em
+}
+
+#home,
+li,
+.collapsed {
+    display: inline-block
+}
+
+LoginAndRegistration {
+    z-index: 10
+}
+
+.navbar-header {
+    display: inline-block
+}
+
+@media (min-width: 768px) {
+    .collapsed {
+        display: none;
+    }
+}

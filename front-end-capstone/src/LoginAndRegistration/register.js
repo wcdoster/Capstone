@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Form, Button, FormControl } from 'react-bootstrap'
 
 class Registration extends Component {
 
@@ -77,29 +78,29 @@ class Registration extends Component {
 
     render() {
         return(
-            <form onSubmit={this.handleSubmit}>
-                <input type="text"
+            <Form>
+                <FormControl type="text"
                 id="username"
                 value={this.state.username}
                 onChange={this.handleFormFieldChange}
                 placeholder="username"/>
 
 
-                <input type="text"
+                <FormControl type="text"
                 id="email"
                 value={this.state.email}
                 onChange={this.handleFormFieldChange}
                 placeholder="email"/>
 
-                <input type="text"
+                <FormControl type="text"
                 id="password"
                 value={this.state.password}
                 onChange={this.handleFormFieldChange}
                 placeholder="password"/>
 
-                <button id="registration--button">Submit</button>
+                <Button onClick={this.handleSubmit} id="registration--button">Submit</Button>
 
-            </form>
+            </Form>
         )
     }
 }
