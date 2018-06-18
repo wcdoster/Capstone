@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
+import { Button, Image } from 'react-bootstrap'
 
 import EpisodeList from './EpisodeList'
+
+import './podcastPage.css'
 
 class PodcastPage extends Component {
 
     state = {
-        subscribed: "",
-        hidden: false
+        subscribed: ""
     }
 
     componentDidMount() {
@@ -71,9 +73,12 @@ class PodcastPage extends Component {
 
     render() {
         return (
-            <div>
-                <h2>{this.props.name}</h2>
-                <button onClick={this.clickFunction} >{this.state.subscribed}</button>
+            <div className="podcastPage--div">
+                <div className="podcastPage--info">
+                    <Image src={this.props.image} />
+                    <h2>{this.props.name}</h2>
+                    <Button className={this.props.class} onClick={this.clickFunction} >{this.state.subscribed}</Button>
+                </div>
                 <EpisodeList hidden={this.state.hidden} episodes={this.props.episodes} click={this.props.click} />
             </div >
         )

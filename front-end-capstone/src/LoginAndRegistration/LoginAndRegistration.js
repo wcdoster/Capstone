@@ -30,9 +30,6 @@ class LoginAndRegistration extends Component {
     render() {
         return (
             <div>
-                {/* <Login setActiveUser={this.props.setActiveUser} setView={this.props.setView}/> */}
-                {/* //     <Registration setActiveUser={this.props.setActiveUser} setView={this.props.setView} />
-            // </div> */}
                 <Nav pullRight>
                     <NavItem eventKey={1} id="login" onClick={this.handleLoginShow}>
                         login
@@ -47,7 +44,7 @@ class LoginAndRegistration extends Component {
                         <Modal.Title>login</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Login setActiveUser={this.props.setActiveUser} setView={this.props.setView} />
+                        <Login setButtonClass={this.props.setButtonClass} setActiveUser={this.props.setActiveUser} setView={this.props.setView} />
                     </Modal.Body>
                 </Modal>
 
@@ -56,7 +53,7 @@ class LoginAndRegistration extends Component {
                         <Modal.Title>register</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Registration setActiveUser={this.props.setActiveUser} setView={this.props.setView} />
+                        <Registration setButtonClass={this.props.setButtonClass} setActiveUser={this.props.setActiveUser} setView={this.props.setView} />
                     </Modal.Body>
                 </Modal>
             </div >

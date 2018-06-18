@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Podcast from './PodcastElement'
+import './podcastList.css'
 
 class PodcastList extends Component {
 
@@ -7,10 +8,10 @@ class PodcastList extends Component {
 
     render(){
         return(
-            <div>
+            <div className="podcastList--div">
                 {this.props.searchResults.map(p => (
                     <Podcast collectionId={p.collectionId} name={p.collectionName}
-                    image={p.artworkUrl30} podcastClick={this.props.podcastClick} key={this.uniqueKey++} />
+                    image={p.artworkUrl600} podcastClick={this.props.podcastClick} key={this.uniqueKey++} />
                 ))}
             </div>
         )

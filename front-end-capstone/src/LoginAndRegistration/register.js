@@ -66,11 +66,11 @@ class Registration extends Component {
                         .then(r => r.json())
                         .then(user => {
                             const userSet = JSON.stringify(user.id)
-                            sessionStorage.setItem("userId", userSet)
-                            localStorage.clear()
+                            localStorage.setItem("userId", userSet)
 
                             this.props.setActiveUser(user)
                             this.props.setView("userPage")
+                            this.props.setButtonClass("")
                         })
                 }
             })

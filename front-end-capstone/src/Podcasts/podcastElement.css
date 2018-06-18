@@ -1,0 +1,40 @@
+
+.topList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly
+}
+
+
+.podcast--div {
+    display: inline-block;
+    text-align: center;
+    margin: 1%;
+    border: solid 1px black;
+    border-radius: 4px;
+    padding-bottom: 5px;
+}
+
+.podcast--div > img {
+    width: 200px;
+    display: block;
+    margin: auto;
+    border-bottom: solid 1px black
+}
+.truncate {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; */
+  }
+
+.podcast--div > a:hover,
+.podcast--div > img:hover {
+    cursor: pointer;
+}
+

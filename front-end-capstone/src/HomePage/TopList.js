@@ -25,7 +25,7 @@ class TopList extends Component {
 
     render() {
         return (
-            <div>
+            <div className="topList">
                 {this.state.podcastList.map(p => (
                     <Podcast collectionId={p.id} name={p.name}
                     image={p.artworkUrl100} podcastClick={this.props.podcastClick} key={this.uniqueKey++} />

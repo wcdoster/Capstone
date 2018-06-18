@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
-import { Form, FormControl, Button, FormGroup, NavItem } from 'react-bootstrap'
+import { FormControl, Button, FormGroup, NavItem } from 'react-bootstrap'
 import LoginAndRegistration from '../LoginAndRegistration/LoginAndRegistration'
 import './navbar.css'
 
@@ -28,26 +28,13 @@ class NavBar extends Component {
                                 <Button onClick={this.props.searchSubmit} type="submit">Submit</Button>
                             </Navbar.Form>
                         </Nav>
-                        <LoginAndRegistration setActiveUser={this.props.setActiveUser} setView={this.props.setView} />
+                        <LoginAndRegistration setButtonClass={this.props.setButtonClass} setActiveUser={this.props.setActiveUser} setView={this.props.setView} />
                     </Navbar.Collapse>
                 </Navbar>
             )
         } else {
             return (
-                // <Navbar fixedTop>
-                //     <Button id="userPage" onClick={this.props.onClickNav}>{this.props.userName}</Button>
-                //     <Form inline onSubmit={this.props.searchSubmit}>
-                //         <FormGroup bsSize="sm">
-                //             <FormControl id="searchValue" type="text" placeholder="search" value={this.props.searchValue} onChange={this.props.handleFormFieldChange} />
-                //         </FormGroup>
-                //         <Button type="submit">Submit</Button>
-                //     </Form>
-                //     <Button id="logout" onClick={this.props.logout}>LogOut</Button>
-                // </Navbar>
-
-
                 <Navbar fluid fixedTop>
-
                     <Navbar.Header>
                         <Nav>
                             <NavItem id="userPage" onClick={this.props.onClickNav}>
