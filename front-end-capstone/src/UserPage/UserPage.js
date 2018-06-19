@@ -81,8 +81,8 @@ class UserPage extends Component {
             <div className="userpage--div">
                 <h2>Your Podcasts</h2>
                 <PodcastList searchResults={this.state.subscribedPodcasts} podcastClick={this.props.podcastClick} />
-                <h2>Most Recent Episodes</h2>
-                <EpisodeList hidden={true} click={this.props.click} episodes={this.state.finishedPodcasts} />
+                {/* <h2>Most Recent Episodes</h2>
+                <EpisodeList hidden={true} click={this.props.click} episodes={this.state.finishedPodcasts} /> */}
                 <h2>Top Podcasts</h2>
                 <TopList podcastClick={this.props.podcastClick} />
             </div >

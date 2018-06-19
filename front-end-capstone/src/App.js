@@ -22,8 +22,12 @@ class App extends Component {
     mediaUrl: "",
     mediaType: "",
     imageUrl: "",
+    episodeName: "",
+    collectionName: "",
     timestamp: Date.now(),
-    class: "hidden"
+    class: "hidden",
+    open: false,
+    buttonText: "v",
   }
 
   componentDidMount() {
@@ -148,7 +152,7 @@ class App extends Component {
       }))
   }.bind(this)
 
-  setButtonClass = function(newClass) {
+  setButtonClass = function (newClass) {
     this.setState({
       class: newClass
     })
@@ -183,23 +187,51 @@ class App extends Component {
 
 
   playButtonClick = function (e) {
-    
     const currentEpisode = this.state.currentPodcast.rss.channel.item.find(episode => {
       return episode.title["#text"] === e.target.parentNode.id.toString()
     })
     this.setState({
       mediaUrl: currentEpisode.enclosure["@attributes"].url,
       mediaType: currentEpisode.enclosure["@attributes"].type,
-      imageUrl: currentEpisode["itunes:image"]["@attributes"].href
+      imageUrl: currentEpisode["itunes:image"]["@attributes"].href,
+      episodeName: currentEpisode.title["#text"],
+      collectionName: this.state.currentItunesInformation.results[0].collectionName,
+      open: true,
+      isPlaying: false
     })
-    this.setView("mediaPlayer")
+    const media = document.getElementById("mediaPlayer")
+    if (media !== null) {
+      media.pause()
+      media.load()
+      media.oncanplaythrough = media.play()
+    }
+  }.bind(this)
+
+
+  showMediaPlayer = function () {
+    if (this.state.mediaUrl !== "") {
+      return <MediaPlayer currentUser={this.state.currentUser} episodeName={this.state.episodeName} collectionId={this.state.collectionId} setView={this.setView} imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} name={this.state.collectionName} episodeName={this.state.episodeName} buttonText={this.state.buttonText} mediaPlayerButton={this.mediaPlayerButton} open={this.state.open} />
+    }
+  }.bind(this)
+
+  mediaPlayerButton = function () {
+    this.setState({
+      open: !this.state.open,
+    })
+    if (this.state.open === true) {
+      this.setState({
+        buttonText: "^",
+      })
+    } else {
+      this.setState({
+        buttonText: "v",
+      })
+    }
   }.bind(this)
 
   showView = function () {
 
     switch (this.state.view) {
-      case "mediaPlayer":
-        return <MediaPlayer setView={this.setView} imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} name={this.state.collectionName} />
       case "podcastPage":
         return <PodcastPage class={this.state.class} image={this.state.currentItunesInformation.results[0].artworkUrl600} episodes={this.state.currentPodcast.rss.channel.item} click={this.playButtonClick} name={this.state.currentItunesInformation.results[0].collectionName} currentUser={this.state.currentUser} collectionId={this.state.currentItunesInformation.results[0].collectionId} />
       case "searchResults":
@@ -210,7 +242,6 @@ class App extends Component {
         return <HomePage podcastClick={this.podcastClick} />
     }
   }.bind(this)
-
 
 
 
@@ -234,6 +265,9 @@ class App extends Component {
         <div id="content">
           {this.showView()}
         </div>
+
+        {this.showMediaPlayer()}
+
       </div >
     )
   }
