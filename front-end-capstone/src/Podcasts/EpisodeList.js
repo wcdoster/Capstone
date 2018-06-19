@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Episode from './Episode'
+import './episodeList.css'
 
 class EpisodeList extends Component {
     
@@ -12,7 +13,8 @@ class EpisodeList extends Component {
     
     render(){
         return(
-            <div>
+            <div className="episodeList--div">
+                <h3>Episodes</h3>
                 {this.props.episodes.slice(0, 10).map(p => (
                     <Episode hidden={this.props.hidden} click={this.props.click} episodeName={p.title["#text"]}  key={this.uniqueKey++} />
                 ))}

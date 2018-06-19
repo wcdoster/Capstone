@@ -78,7 +78,7 @@ class UserPage extends Component {
 
     render() {
         return (
-            <div>
+            <div className="userpage--div">
                 <h2>Your Podcasts</h2>
                 <PodcastList searchResults={this.state.subscribedPodcasts} podcastClick={this.props.podcastClick} />
                 <h2>Most Recent Episodes</h2>

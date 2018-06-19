@@ -7,28 +7,10 @@
       "password": "password"
     },
     {
-      "username": "test",
-      "email": "test",
-      "password": "password",
-      "id": "8LsPSYp"
-    },
-    {
-      "username": "matt",
-      "email": "matt@matt.matt",
-      "password": "matt",
-      "id": "_zhZbKA"
-    },
-    {
-      "username": "jess",
+      "username": "jes",
       "email": "jess@jess",
-      "password": "password",
-      "id": "e5t5R6T"
-    },
-    {
-      "username": "testing",
-      "email": "testing",
-      "password": "password",
-      "id": "1rzlz3d"
+      "password": "jess",
+      "id": "hcSyu1K"
     }
   ],
   "subscribedPodcasts": [
@@ -46,11 +28,6 @@
       "userId": "1",
       "collectionId": 917918570,
       "id": "~ayB~Ue"
-    },
-    {
-      "userId": "1",
-      "collectionId": 360084272,
-      "id": "m_ZQ7zh"
     },
     {
       "userId": "1",
@@ -91,6 +68,21 @@
       "userId": "1rzlz3d",
       "collectionId": 941907967,
       "id": "guJbl~s"
+    },
+    {
+      "userId": "vs8Hu_J",
+      "collectionId": 360084272,
+      "id": "oH8FKkx"
+    },
+    {
+      "userId": "5GrQ_VP",
+      "collectionId": 917918570,
+      "id": "GW3kPRP"
+    },
+    {
+      "userId": "hcSyu1K",
+      "collectionId": 1074507850,
+      "id": "qpW9oMv"
     }
   ],
   "finishedPodcasts": [

@@ -1,0 +1,16 @@
+
+.podcastPage--info > img {
+    height: 200px;
+    padding-left: 15px;
+    padding-right: 10px;
+    display: block;
+    float: left;
+}
+
+.podcastPage--info {
+    height:220px
+}
+
+.podcastPage--info > h2 {
+    
+}

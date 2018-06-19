@@ -1,0 +1,13 @@
+
+.episodeList--div {
+    width: 90%;
+    margin: auto
+}
+
+.episodeList--div > div{
+    border-bottom: solid 1px black
+}
+
+.episodeList--div > h3{
+    margin-bottom: 30px
+}
