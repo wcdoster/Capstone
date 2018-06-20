@@ -19,9 +19,9 @@
 }
 
 .mediaBar {
+    display: inline-block;
     width: 350px;
     border: 1px solid black;
-    border-radius: 0 4px 0 0;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -37,6 +37,22 @@
     border-radius: 0 4px 0 0;
 }
 
-.mediaBar > h4:hover {
+.mediaBar > h4:hover,
+#close--button:hover {
     cursor: pointer;
+}
+
+#close--button {
+    position: fixed;
+    bottom: 0;
+    left: 350px;
+    padding: 5px 10px 5px 15px;
+    width: 40px;
+    height: 34px;
+    margin: 0;
+    vertical-align: middle;
+    background-color: white;
+    border: 1px black solid;
+    border-left: white;
+    border-radius: 0 4px 0 0;
 }

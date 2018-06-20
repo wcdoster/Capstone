@@ -74,12 +74,14 @@ class PodcastPage extends Component {
     render() {
         return (
             <div className="podcastPage--div">
+            {/* <Button onClick={this.props.setView("searchResults")} id="page--back--button">Back</Button> */}
                 <div className="podcastPage--info">
                     <Image src={this.props.image} />
                     <h2>{this.props.name}</h2>
+                    <h5>{this.props.check(this.props.description)}</h5>
                     <Button className={this.props.class} onClick={this.clickFunction} >{this.state.subscribed}</Button>
                 </div>
-                <EpisodeList hidden={this.state.hidden} episodes={this.props.episodes} click={this.props.click} />
+                <EpisodeList check={this.props.check} hidden={this.state.hidden} episodes={this.props.episodes} click={this.props.click} />
             </div >
         )
     }

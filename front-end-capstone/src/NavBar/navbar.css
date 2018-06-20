@@ -8,6 +8,11 @@ li,
     display: inline-block
 }
 
+#home,
+#userPage {
+    margin-left: 15%
+}
+
 LoginAndRegistration {
     z-index: 10
 }
@@ -20,4 +25,9 @@ LoginAndRegistration {
     .collapsed {
         display: none;
     }
+
+    #home,
+    #userPage {
+        margin: auto
+}
 }

@@ -7,8 +7,9 @@ class Episode extends Component {
         return(
             <div id={this.props.episodeName}>
                 <h4>{this.props.episodeName}</h4>
+                
                 {/* <h5>{this.props.length}</h5> */}
-                <h5>{this.props.description}</h5>
+                <p>{this.props.description}</p>
                 <Button hidden={this.props.hidden} onClick={this.props.click}>Play Episode</Button>
             </div>
         )

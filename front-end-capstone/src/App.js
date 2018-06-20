@@ -19,6 +19,7 @@ class App extends Component {
     searchResults: [],
     currentPodcast: {},
     currentItunesInformation: {},
+    podcastImage: "",
     mediaUrl: "",
     mediaType: "",
     imageUrl: "",
@@ -28,11 +29,12 @@ class App extends Component {
     class: "hidden",
     open: false,
     buttonText: "v",
+    description: ""
   }
 
   componentDidMount() {
     this.initialView()
-    const userId = localStorage.getItem("userId")
+    const userId = JSON.parse(localStorage.getItem("userId"))
     if (userId) {
       fetch(`http://localhost:8088/users?id=${userId}`)
         .then(r => r.json())
@@ -140,6 +142,11 @@ class App extends Component {
       })
   }.bind(this)
 
+  regexCheck = function (string) {
+    let p = string.replace(/<[^>]*>/gi, '');
+    return p
+  }.bind(this)
+
   getSearchResults = function () {
     const terms = this.state.searchValue.split(" ")
     const newTerms = terms.join('+')
@@ -170,13 +177,33 @@ class App extends Component {
     fetch(`https://itunes.apple.com/lookup?id=${targetCondition}`)
       .then(r => r.json())
       .then(result => {
-        $.get(`${result.results[0].feedUrl}?format=xml`, r => {
+        let thisFeedUrl = result.results[0].feedUrl
+        if (thisFeedUrl.indexOf('?format=xml') === -1){
+          thisFeedUrl+='?format=xml'
+        }
+        $.get(thisFeedUrl, r => {
+          const current = this.xmlToJson(r)
+          const desc = current.rss.channel.description
+
+          let thisDescription = ""
+
+          if (desc["#cdata-section"]) {
+            thisDescription = desc["#cdata-section"]
+          } else if (desc["#text"]) {
+            thisDescription = desc["#text"]
+          } else {
+            thisDescription = desc
+          }
 
           this.setState({
-            currentPodcast: this.xmlToJson(r),
-            currentItunesInformation: result
+            currentPodcast: current,
+            currentItunesInformation: result,
+            description: thisDescription
           })
-        }).then(() => this.setView("podcastPage"))
+        }).then(() => {
+          this.setView("podcastPage")
+          window.scrollTo(0,0)
+        })
       })
   }.bind(this)
 
@@ -190,10 +217,11 @@ class App extends Component {
     const currentEpisode = this.state.currentPodcast.rss.channel.item.find(episode => {
       return episode.title["#text"] === e.target.parentNode.id.toString()
     })
+    console.log(currentEpisode)
     this.setState({
       mediaUrl: currentEpisode.enclosure["@attributes"].url,
       mediaType: currentEpisode.enclosure["@attributes"].type,
-      imageUrl: currentEpisode["itunes:image"]["@attributes"].href,
+      imageUrl: this.state.currentItunesInformation.results[0].artworkUrl600,
       episodeName: currentEpisode.title["#text"],
       collectionName: this.state.currentItunesInformation.results[0].collectionName,
       open: true,
@@ -207,10 +235,16 @@ class App extends Component {
     }
   }.bind(this)
 
+  closeClick = function () {
+    this.setState({
+      mediaUrl: ""
+    })
+  }.bind(this)
+
 
   showMediaPlayer = function () {
     if (this.state.mediaUrl !== "") {
-      return <MediaPlayer currentUser={this.state.currentUser} episodeName={this.state.episodeName} collectionId={this.state.collectionId} setView={this.setView} imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} name={this.state.collectionName} episodeName={this.state.episodeName} buttonText={this.state.buttonText} mediaPlayerButton={this.mediaPlayerButton} open={this.state.open} />
+      return <MediaPlayer closeClick={this.closeClick} currentUser={this.state.currentUser} episodeName={this.state.episodeName} collectionId={this.state.collectionId} setView={this.setView} imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} name={this.state.collectionName} episodeName={this.state.episodeName} buttonText={this.state.buttonText} mediaPlayerButton={this.mediaPlayerButton} open={this.state.open} />
     }
   }.bind(this)
 
@@ -230,10 +264,9 @@ class App extends Component {
   }.bind(this)
 
   showView = function () {
-
     switch (this.state.view) {
       case "podcastPage":
-        return <PodcastPage class={this.state.class} image={this.state.currentItunesInformation.results[0].artworkUrl600} episodes={this.state.currentPodcast.rss.channel.item} click={this.playButtonClick} name={this.state.currentItunesInformation.results[0].collectionName} currentUser={this.state.currentUser} collectionId={this.state.currentItunesInformation.results[0].collectionId} />
+        return <PodcastPage check={this.regexCheck} description={this.state.description} setView={this.setView} class={this.state.class} image={this.state.currentItunesInformation.results[0].artworkUrl600} episodes={this.state.currentPodcast.rss.channel.item} click={this.playButtonClick} name={this.state.currentItunesInformation.results[0].collectionName} currentUser={this.state.currentUser} collectionId={this.state.currentItunesInformation.results[0].collectionId} />
       case "searchResults":
         return <PodcastList searchResults={this.state.searchResults} setView={this.setView} podcastClick={this.podcastClick} />
       case "userPage":

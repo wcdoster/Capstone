@@ -11,6 +11,11 @@
     height:220px
 }
 
-.podcastPage--info > h2 {
-    
+.podcastPage--info{
+    width: 93%;
+    margin: auto
+}
+
+.podcastPage--div {
+    margin-bottom: 40px
 }

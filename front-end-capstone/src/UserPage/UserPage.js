@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PodcastList from '../Podcasts/PodcastList'
-import EpisodeList from '../Podcasts/EpisodeList'
+// import EpisodeList from '../Podcasts/EpisodeList'
 import TopList from '../HomePage/TopList'
-
-const $ = require('jquery')
+import './userPage.css'
+// const $ = require('jquery')
 
 class UserPage extends Component {
     state = {
@@ -31,54 +31,51 @@ class UserPage extends Component {
                         })
                 })
             })
-        fetch(`http://localhost:8088/finishedPodcasts?userId=${this.props.currentUser}`)
-            .then(r => r.json())
-            .then(results => {
-                const podcastList = []
-                results.forEach(x => {
-                    $.get(`${x.rssFeed}?format=xml`, p => {
-                        const eps = this.props.xmlToJson(p)
-                        console.log(eps)
-                        const episodes = eps.rss.channel.item
-                        episodes.forEach(episode => {
-                            if (episode.title["#text"] === x.title) {
-                                podcastList.push(episode)
-                                this.setState({
-                                    finishedPodcasts: podcastList
-                                })
-                            }
-                        })
-                        console.log(podcastList)
-                    })
+    //     fetch(`http://localhost:8088/finishedPodcasts?userId=${this.props.currentUser}`)
+    //         .then(r => r.json())
+    //         .then(results => {
+    //             const podcastList = []
+    //             results.forEach(x => {
+    //                 $.get(`${x.rssFeed}?format=xml`, p => {
+    //                     const eps = this.props.xmlToJson(p)
+    //                     const episodes = eps.rss.channel.item
+    //                     episodes.forEach(episode => {
+    //                         if (episode.title["#text"] === x.title) {
+    //                             podcastList.push(episode)
+    //                             this.setState({
+    //                                 finishedPodcasts: podcastList
+    //                             })
+    //                         }
+    //                     })
+    //                 })
 
-                })
-            })
-        fetch(`http://localhost:8088/inProgressPodcasts?userId=${this.props.currentUser}`)
-            .then(r => r.json())
-            .then(results => {
-                const podcastList = []
-                results.forEach(x => {
-                    $.get(`${x.rssFeed}?format=xml`, p => {
-                        const eps = this.props.xmlToJson(p)
-                        console.log(eps)
-                        const episodes = eps.rss.channel.item
-                        episodes.forEach(episode => {
-                            if (episode.title["#text"] === x.title) {
-                                podcastList.push(episode)
-                                this.setState({
-                                    inProgressPodcasts: podcastList
-                                })
-                            }
-                        })
-                    }
-                    )
-                })
-            })
+    //             })
+    //         })
+    //     fetch(`http://localhost:8088/inProgressPodcasts?userId=${this.props.currentUser}`)
+    //         .then(r => r.json())
+    //         .then(results => {
+    //             const podcastList = []
+    //             results.forEach(x => {
+    //                 $.get(`${x.rssFeed}?format=xml`, p => {
+    //                     const eps = this.props.xmlToJson(p)
+    //                     const episodes = eps.rss.channel.item
+    //                     episodes.forEach(episode => {
+    //                         if (episode.title["#text"] === x.title) {
+    //                             podcastList.push(episode)
+    //                             this.setState({
+    //                                 inProgressPodcasts: podcastList
+    //                             })
+    //                         }
+    //                     })
+    //                 }
+    //                 )
+    //             })
+    //         })
     }
 
     render() {
         return (
-            <div className="userpage--div">
+            <div id="userpage--div">
                 <h2>Your Podcasts</h2>
                 <PodcastList searchResults={this.state.subscribedPodcasts} podcastClick={this.props.podcastClick} />
                 {/* <h2>Most Recent Episodes</h2>
