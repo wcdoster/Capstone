@@ -217,7 +217,6 @@ class App extends Component {
     const currentEpisode = this.state.currentPodcast.rss.channel.item.find(episode => {
       return episode.title["#text"] === e.target.parentNode.id.toString()
     })
-    console.log(currentEpisode)
     this.setState({
       mediaUrl: currentEpisode.enclosure["@attributes"].url,
       mediaType: currentEpisode.enclosure["@attributes"].type,
