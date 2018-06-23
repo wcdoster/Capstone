@@ -16,3 +16,26 @@
 .queue--hidden{
     display: none;
 }
+
+#queue--episode--buttons {
+    margin-left: 10px
+}
+
+#queue--episode--buttons > button{
+    border-radius: 6px
+}
+
+#move--up{
+    height: 11px;
+    font-size: .6em;
+    border-radius: 10px;
+    margin-bottom: 1px
+}
+
+#move--down{
+    transform: rotate(180deg);
+    height: 11px;
+    font-size: .6em;
+    border-radius: 10px;
+    margin-top: 1px;
+}

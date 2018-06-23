@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import './queueList.css'
+import { Button, ButtonGroup } from 'react-bootstrap'
 
 class QueueItem extends Component {
+
     render() {
         return (
             <div className={this.props.queueHidden}>
@@ -9,6 +11,13 @@ class QueueItem extends Component {
                     <img src={this.props.image} />
                     <h6>{this.props.name}: &nbsp;</h6>
                     <p>{this.props.episodeName}</p>
+                    <ButtonGroup id="queue--episode--buttons">
+                        <Button bsSize="xsmall" id={this.props.episodeName} onClick={this.props.clickQueueEpisode}>Play</Button>
+                        <ButtonGroup id="move--arrows" vertical>
+                            <Button onClick={this.props.moveUp} bsSize="xsmall" id="move--up">^</Button>
+                            <Button onClick={this.props.moveDown} bsSize="xsmall" id="move--down">^</Button>
+                        </ButtonGroup>
+                    </ButtonGroup>
                 </div>
             </div>
         )

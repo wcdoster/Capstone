@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Collapse } from 'react-bootstrap'
+import { Collapse, Button, Glyphicon } from 'react-bootstrap'
 import './podcastPlayer.css'
 import QueueList from './QueueList'
 
@@ -34,7 +34,7 @@ class MediaPlayer extends Component {
         return (
 
             <div>
-            {/* {this.props.mediaCheck()} */}
+                {/* {this.props.mediaCheck()} */}
                 <div className="mediaPlayer--div">
                     <Collapse in={this.props.open}>
                         <div className="episode--information">
@@ -53,13 +53,16 @@ class MediaPlayer extends Component {
                     </div>
 
                 </div>
-                    <div id="queue--div">
-                        <Collapse id="queue--list--container" in={this.props.queueOpen}>
-                            <QueueList queueHidden={this.props.queueHidden} queue={this.props.queue} />
-                        </Collapse>
-                        </div>
-                        <h4 onClick={this.props.queueOpenClick} id="queue--button">Q</h4>
-                    <h4 onClick={this.props.closeClick} id="close--button">x</h4>
+                <div id="queue--div">
+                    <Collapse id="queue--list--container" in={this.props.queueOpen}>
+                        <QueueList moveUp={this.props.moveUp} moveDown={this.props.moveDown} uniqueKey={this.props.uniqueKey} clickQueueEpisode={this.props.clickQueueEpisode} queueHidden={this.props.queueHidden} queue={this.props.queue} />
+                    </Collapse>
+                </div>
+                {/* <h4 onClick={this.props.queueOpenClick} id="queue--button">Q</h4> */}
+                <Button onClick={this.props.queueOpenClick} id="queue--button">
+                    <Glyphicon glyph="align-justify" />
+                </Button>
+                <h4 onClick={this.props.closeClick} id="close--button">x</h4>
             </div>
         )
     }

@@ -243,10 +243,80 @@ class App extends Component {
     })
   }.bind(this)
 
+  clickQueueEpisode = function (e) {
+    const media = document.getElementById("mediaPlayer")
+    const nextEpisodeName = e.target.id
+    const nextEpisodeIndex = this.state.queue.indexOf(this.state.queue.find(episode => {
+      return episode.episodeName === nextEpisodeName
+    }))
+    const nextEpisode = this.state.queue[nextEpisodeIndex]
+    console.log(nextEpisode)
+    this.setState({
+      mediaUrl: nextEpisode.mediaUrl,
+      mediaType: nextEpisode.mediaType,
+      imageUrl: nextEpisode.imageUrl,
+      episodeName: nextEpisode.episodeName,
+      collectionName: nextEpisode.collectionName,
+      open: true,
+      isPlaying: false
+    })
+    media.pause()
+    media.load()
+    media.oncanplaythrough = media.play()
+  }.bind(this)
+
+  moveUp = function (e) {
+    let thisArray = this.state.queue
+    const episode = e.target.parentNode.previousSibling.id
+    const episodeIndex = this.state.queue.indexOf(this.state.queue.find(thisepisode => {
+      return thisepisode.episodeName === episode
+    }))
+    const newIndex = episodeIndex - 1
+    if (episodeIndex === 1) {
+      const beginning = thisArray.splice(1, 1)
+      const newArray = beginning.concat(thisArray)
+      this.setState({
+        queue: newArray
+      })
+    }
+    if (episodeIndex > 0) {
+      const beginning = thisArray.splice(0, newIndex)
+      const middle = thisArray.splice(1, 1)
+      const newArray = beginning.concat(middle, thisArray)
+      this.setState({
+        queue: newArray
+      })
+    }
+  }.bind(this)
+
+  moveDown = function (e) {
+    let thisArray = this.state.queue
+    const episode = e.target.parentNode.previousSibling.id
+    const episodeIndex = this.state.queue.indexOf(this.state.queue.find(thisepisode => {
+      return thisepisode.episodeName === episode
+    }))
+    if (episodeIndex === thisArray.length-2) {
+      const end = thisArray.splice(episodeIndex, 1)
+      const newArray = thisArray.concat(end)
+      this.setState({
+        queue: newArray
+      })
+    }
+    if (episodeIndex !== thisArray.length-1) {
+      const item = thisArray.splice(episodeIndex, 1)
+      console.log(item)
+      const beginning = thisArray.splice(0, episodeIndex+1)
+      const newArray = beginning.concat(item, thisArray)
+      console.log(newArray)
+      this.setState({
+        queue: newArray
+      })
+    }
+  }.bind(this)
 
   showMediaPlayer = function () {
     if (this.state.mediaUrl !== "") {
-      return <MediaPlayer queueHidden={this.state.queueHidden} queueOpen={this.state.queueOpen} queueOpenClick={this.queueOpenClick} queue={this.state.queue} mediaEnd={this.mediaEndCheck} closeClick={this.closeClick} currentUser={this.state.currentUser} episodeName={this.state.episodeName} collectionId={this.state.collectionId} setView={this.setView} imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} name={this.state.collectionName} episodeName={this.state.episodeName} buttonText={this.state.buttonText} mediaPlayerButton={this.mediaPlayerButton} open={this.state.open} />
+      return <MediaPlayer moveUp={this.moveUp} moveDown={this.moveDown} clickQueueEpisode={this.clickQueueEpisode} queueHidden={this.state.queueHidden} queueOpen={this.state.queueOpen} queueOpenClick={this.queueOpenClick} queue={this.state.queue} mediaEnd={this.mediaEndCheck} closeClick={this.closeClick} currentUser={this.state.currentUser} episodeName={this.state.episodeName} collectionId={this.state.collectionId} setView={this.setView} imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} name={this.state.collectionName} episodeName={this.state.episodeName} buttonText={this.state.buttonText} mediaPlayerButton={this.mediaPlayerButton} open={this.state.open} />
     }
   }.bind(this)
 
@@ -266,17 +336,17 @@ class App extends Component {
   }.bind(this)
 
   queueOpenClick = function () {
-    if(this.state.queueOpen) {
-    this.setState({
-      queueOpen: !this.state.queueOpen,
-      queueHidden: "queue--hidden"
-    })
-  }else{
-    this.setState({
-      queueOpen: !this.state.queueOpen,
-      queueHidden: ""
-    })
-  }
+    if (this.state.queueOpen) {
+      this.setState({
+        queueOpen: !this.state.queueOpen,
+        queueHidden: "queue--hidden"
+      })
+    } else {
+      this.setState({
+        queueOpen: !this.state.queueOpen,
+        queueHidden: ""
+      })
+    }
   }.bind(this)
 
   queueClick = function (e) {
@@ -298,18 +368,6 @@ class App extends Component {
       queue: newQueueArray
     })
   }.bind(this)
-
-  // mediaPlayingCheck = function () {
-  //   const media = document.getElementById("mediaPlayer")
-  //   if (media) {
-  //     if (media.paused) {
-  //       this.setState({
-  //         paused: true
-  //       })
-  //       this.mediaEndCheck()
-  //     }
-  //   }
-  // }.bind(this)
 
   mediaEndCheck = function () {
     const media = document.getElementById("mediaPlayer")
