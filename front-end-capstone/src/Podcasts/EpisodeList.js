@@ -30,7 +30,7 @@ class EpisodeList extends Component {
             <div className="episodeList--div">
                 <h3>Episodes</h3>
                 {this.props.episodes.slice(0, 10).map(p => (
-                    <Episode queueHidden={this.props.queueHidden} queueClick={this.props.queueClick} hidden={this.props.hidden} description={this.props.check(this.descriptionType(p.description))} click={this.props.click} episodeName={p.title["#text"]} key={this.uniqueKey++} />
+                    <Episode removeFromQueue={this.props.removeFromQueue} queue={this.props.queue} collectionName={this.props.collectionName} queueHidden={this.props.queueHidden} queueClick={this.props.queueClick} hidden={this.props.hidden} description={this.props.check(this.descriptionType(p.description))} click={this.props.click} episodeName={p.title["#text"]} key={this.uniqueKey++} />
                 ))}
             </div>
         )

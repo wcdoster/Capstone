@@ -304,19 +304,29 @@ class App extends Component {
     }
     if (episodeIndex !== thisArray.length-1) {
       const item = thisArray.splice(episodeIndex, 1)
-      console.log(item)
       const beginning = thisArray.splice(0, episodeIndex+1)
       const newArray = beginning.concat(item, thisArray)
-      console.log(newArray)
       this.setState({
         queue: newArray
       })
     }
   }.bind(this)
 
+  removeFromQueue = function(e) {
+    const episode = e.target.parentNode.firstChild.id
+    const episodeIndex = this.state.queue.indexOf(this.state.queue.find(thisepisode => {
+      return thisepisode.episodeName === episode
+    }))
+    let array = this.state.queue
+    array.splice(episodeIndex, 1)
+    this.setState({
+      queue: array
+    })
+  }.bind(this)
+
   showMediaPlayer = function () {
     if (this.state.mediaUrl !== "") {
-      return <MediaPlayer moveUp={this.moveUp} moveDown={this.moveDown} clickQueueEpisode={this.clickQueueEpisode} queueHidden={this.state.queueHidden} queueOpen={this.state.queueOpen} queueOpenClick={this.queueOpenClick} queue={this.state.queue} mediaEnd={this.mediaEndCheck} closeClick={this.closeClick} currentUser={this.state.currentUser} episodeName={this.state.episodeName} collectionId={this.state.collectionId} setView={this.setView} imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} name={this.state.collectionName} episodeName={this.state.episodeName} buttonText={this.state.buttonText} mediaPlayerButton={this.mediaPlayerButton} open={this.state.open} />
+      return <MediaPlayer removeFromQueue={this.removeFromQueue} moveUp={this.moveUp} moveDown={this.moveDown} clickQueueEpisode={this.clickQueueEpisode} queueHidden={this.state.queueHidden} queueOpen={this.state.queueOpen} queueOpenClick={this.queueOpenClick} queue={this.state.queue} mediaEnd={this.mediaEndCheck} closeClick={this.closeClick} currentUser={this.state.currentUser} episodeName={this.state.episodeName} collectionId={this.state.collectionId} setView={this.setView} imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} name={this.state.collectionName} episodeName={this.state.episodeName} buttonText={this.state.buttonText} mediaPlayerButton={this.mediaPlayerButton} open={this.state.open} />
     }
   }.bind(this)
 
@@ -397,7 +407,7 @@ class App extends Component {
   showView = function () {
     switch (this.state.view) {
       case "podcastPage":
-        return <PodcastPage queueClick={this.queueClick} check={this.regexCheck} description={this.state.description} setView={this.setView} class={this.state.class} image={this.state.currentItunesInformation.results[0].artworkUrl600} episodes={this.state.currentPodcast.rss.channel.item} click={this.playButtonClick} name={this.state.currentItunesInformation.results[0].collectionName} currentUser={this.state.currentUser} collectionId={this.state.currentItunesInformation.results[0].collectionId} />
+        return <PodcastPage removeFromQueue={this.removeFromQueue} queue={this.state.queue} queueClick={this.queueClick} check={this.regexCheck} description={this.state.description} setView={this.setView} class={this.state.class} image={this.state.currentItunesInformation.results[0].artworkUrl600} episodes={this.state.currentPodcast.rss.channel.item} click={this.playButtonClick} name={this.state.currentItunesInformation.results[0].collectionName} currentUser={this.state.currentUser} collectionId={this.state.currentItunesInformation.results[0].collectionId} />
       case "searchResults":
         return <PodcastList searchResults={this.state.searchResults} setView={this.setView} podcastClick={this.podcastClick} />
       case "userPage":

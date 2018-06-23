@@ -53,9 +53,9 @@ class MediaPlayer extends Component {
                     </div>
 
                 </div>
-                <div id="queue--div">
+                <div id="queue--div" className={this.props.queueHidden}>
                     <Collapse id="queue--list--container" in={this.props.queueOpen}>
-                        <QueueList moveUp={this.props.moveUp} moveDown={this.props.moveDown} uniqueKey={this.props.uniqueKey} clickQueueEpisode={this.props.clickQueueEpisode} queueHidden={this.props.queueHidden} queue={this.props.queue} />
+                        <QueueList removeFromQueue={this.props.removeFromQueue} moveUp={this.props.moveUp} moveDown={this.props.moveDown} uniqueKey={this.props.uniqueKey} clickQueueEpisode={this.props.clickQueueEpisode} queueHidden={this.props.queueHidden} queue={this.props.queue} />
                     </Collapse>
                 </div>
                 {/* <h4 onClick={this.props.queueOpenClick} id="queue--button">Q</h4> */}

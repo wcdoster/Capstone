@@ -1,16 +1,34 @@
-.queue--item > img {
+
+#queue--item {
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid black;
+}
+
+#queue--list > h5 {
+    margin: 0;
+    padding: 5px 0 5px 5px;
+}
+
+.queue--information {
+    width: 230px;
+    
+}
+
+.queue--information > img {
     display: inline-block;
     width: 25px;
 }
 
-.queue--item > h6 {
+.queue--information > h6 {
     display: inline-block;
     font-size: 1.1em;
+    margin: 2px;
 }
 
-.queue--item > p{
-    display: inline-block;
+.queue--information > p{
     font-size: .9em;
+    margin: 2px;
 }
 
 .queue--hidden{
@@ -18,6 +36,7 @@
 }
 
 #queue--episode--buttons {
+    margin: auto;
     margin-left: 10px
 }
 
@@ -38,4 +57,18 @@
     font-size: .6em;
     border-radius: 10px;
     margin-top: 1px;
+}
+
+/* #queue--list {
+    width: 320px;
+    border: 1px solid black;
+    border-radius: 7px 7px 7px 0;
+} */
+
+#queue--div {
+    width: 320px;
+    max-height: 300px;
+    overflow-y: scroll;
+    border: 1px solid black;
+    border-radius: 7px 7px 7px 0;
 }
