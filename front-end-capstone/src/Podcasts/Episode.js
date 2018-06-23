@@ -11,6 +11,7 @@ class Episode extends Component {
                 {/* <h5>{this.props.length}</h5> */}
                 <p>{this.props.description}</p>
                 <Button hidden={this.props.hidden} onClick={this.props.click}>Play Episode</Button>
+                <Button hidden={this.props.queueHidden} onClick={this.props.queueClick}>Add to Queue</Button>
             </div>
         )
     }

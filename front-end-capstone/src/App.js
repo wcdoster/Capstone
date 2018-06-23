@@ -29,7 +29,10 @@ class App extends Component {
     class: "hidden",
     open: false,
     buttonText: "v",
-    description: ""
+    description: "",
+    queue: [],
+    queueHidden: "queue--hidden",
+    queueOpen: false
   }
 
   componentDidMount() {
@@ -178,8 +181,8 @@ class App extends Component {
       .then(r => r.json())
       .then(result => {
         let thisFeedUrl = result.results[0].feedUrl
-        if (thisFeedUrl.indexOf('?format=xml') === -1){
-          thisFeedUrl+='?format=xml'
+        if (thisFeedUrl.indexOf('?format=xml') === -1) {
+          thisFeedUrl += '?format=xml'
         }
         $.get(thisFeedUrl, r => {
           const current = this.xmlToJson(r)
@@ -202,7 +205,7 @@ class App extends Component {
           })
         }).then(() => {
           this.setView("podcastPage")
-          window.scrollTo(0,0)
+          window.scrollTo(0, 0)
         })
       })
   }.bind(this)
@@ -243,7 +246,7 @@ class App extends Component {
 
   showMediaPlayer = function () {
     if (this.state.mediaUrl !== "") {
-      return <MediaPlayer closeClick={this.closeClick} currentUser={this.state.currentUser} episodeName={this.state.episodeName} collectionId={this.state.collectionId} setView={this.setView} imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} name={this.state.collectionName} episodeName={this.state.episodeName} buttonText={this.state.buttonText} mediaPlayerButton={this.mediaPlayerButton} open={this.state.open} />
+      return <MediaPlayer queueHidden={this.state.queueHidden} queueOpen={this.state.queueOpen} queueOpenClick={this.queueOpenClick} queue={this.state.queue} mediaEnd={this.mediaEndCheck} closeClick={this.closeClick} currentUser={this.state.currentUser} episodeName={this.state.episodeName} collectionId={this.state.collectionId} setView={this.setView} imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} name={this.state.collectionName} episodeName={this.state.episodeName} buttonText={this.state.buttonText} mediaPlayerButton={this.mediaPlayerButton} open={this.state.open} />
     }
   }.bind(this)
 
@@ -262,10 +265,81 @@ class App extends Component {
     }
   }.bind(this)
 
+  queueOpenClick = function () {
+    if(this.state.queueOpen) {
+    this.setState({
+      queueOpen: !this.state.queueOpen,
+      queueHidden: "queue--hidden"
+    })
+  }else{
+    this.setState({
+      queueOpen: !this.state.queueOpen,
+      queueHidden: ""
+    })
+  }
+  }.bind(this)
+
+  queueClick = function (e) {
+    console.log("yes")
+    const queueEpisode = this.state.currentPodcast.rss.channel.item.find(episode => {
+      return episode.title["#text"] === e.target.parentNode.id.toString()
+    })
+    const nextEpisode = {
+      mediaUrl: queueEpisode.enclosure["@attributes"].url,
+      mediaType: queueEpisode.enclosure["@attributes"].type,
+      imageUrl: this.state.currentItunesInformation.results[0].artworkUrl600,
+      episodeName: queueEpisode.title["#text"],
+      collectionName: this.state.currentItunesInformation.results[0].collectionName
+    }
+    console.log(nextEpisode)
+    let newQueueArray = this.state.queue
+    newQueueArray.push(nextEpisode)
+    this.setState({
+      queue: newQueueArray
+    })
+  }.bind(this)
+
+  // mediaPlayingCheck = function () {
+  //   const media = document.getElementById("mediaPlayer")
+  //   if (media) {
+  //     if (media.paused) {
+  //       this.setState({
+  //         paused: true
+  //       })
+  //       this.mediaEndCheck()
+  //     }
+  //   }
+  // }.bind(this)
+
+  mediaEndCheck = function () {
+    const media = document.getElementById("mediaPlayer")
+    if (media) {
+      if (media.ended && this.state.queue.length > 0) {
+        this.setState({
+          mediaUrl: this.state.queue[0].mediaUrl,
+          mediaType: this.state.queue[0].mediaType,
+          imageUrl: this.state.queue[0].imageUrl,
+          episodeName: this.state.queue[0].episodeName,
+          collectionName: this.state.queue[0].collectionName,
+          open: true,
+          isPlaying: false
+        })
+        let newQueue = this.state.queue
+        newQueue.shift()
+        this.setState({
+          queue: newQueue
+        })
+        media.pause()
+        media.load()
+        media.oncanplaythrough = media.play()
+      }
+    }
+  }.bind(this)
+
   showView = function () {
     switch (this.state.view) {
       case "podcastPage":
-        return <PodcastPage check={this.regexCheck} description={this.state.description} setView={this.setView} class={this.state.class} image={this.state.currentItunesInformation.results[0].artworkUrl600} episodes={this.state.currentPodcast.rss.channel.item} click={this.playButtonClick} name={this.state.currentItunesInformation.results[0].collectionName} currentUser={this.state.currentUser} collectionId={this.state.currentItunesInformation.results[0].collectionId} />
+        return <PodcastPage queueClick={this.queueClick} check={this.regexCheck} description={this.state.description} setView={this.setView} class={this.state.class} image={this.state.currentItunesInformation.results[0].artworkUrl600} episodes={this.state.currentPodcast.rss.channel.item} click={this.playButtonClick} name={this.state.currentItunesInformation.results[0].collectionName} currentUser={this.state.currentUser} collectionId={this.state.currentItunesInformation.results[0].collectionId} />
       case "searchResults":
         return <PodcastList searchResults={this.state.searchResults} setView={this.setView} podcastClick={this.podcastClick} />
       case "userPage":

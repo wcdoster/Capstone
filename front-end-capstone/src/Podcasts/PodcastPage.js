@@ -81,7 +81,7 @@ class PodcastPage extends Component {
                     <h5>{this.props.check(this.props.description)}</h5>
                     <Button className={this.props.class} onClick={this.clickFunction} >{this.state.subscribed}</Button>
                 </div>
-                <EpisodeList check={this.props.check} hidden={this.state.hidden} episodes={this.props.episodes} click={this.props.click} />
+                <EpisodeList queueHidden={this.props.queueHidden} queueClick={this.props.queueClick} check={this.props.check} hidden={this.state.hidden} episodes={this.props.episodes} click={this.props.click} />
             </div >
         )
     }

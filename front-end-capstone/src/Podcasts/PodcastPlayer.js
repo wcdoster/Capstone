@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Collapse } from 'react-bootstrap'
 import './podcastPlayer.css'
+import QueueList from './QueueList'
 
 class MediaPlayer extends Component {
 
@@ -31,7 +32,9 @@ class MediaPlayer extends Component {
 
     render() {
         return (
+
             <div>
+            {/* {this.props.mediaCheck()} */}
                 <div className="mediaPlayer--div">
                     <Collapse in={this.props.open}>
                         <div className="episode--information">
@@ -41,7 +44,7 @@ class MediaPlayer extends Component {
                         </div>
                     </Collapse>
                     <div className="mediaBar">
-                        <audio id="mediaPlayer" controls>
+                        <audio id="mediaPlayer" onEnded={this.props.mediaEnd} controls>
                             <source src={this.props.mediaUrl} type={this.props.mediaType} />
                         </audio>
                         <h4 onClick={this.props.mediaPlayerButton}>
@@ -50,6 +53,12 @@ class MediaPlayer extends Component {
                     </div>
 
                 </div>
+                    <div id="queue--div">
+                        <Collapse id="queue--list--container" in={this.props.queueOpen}>
+                            <QueueList queueHidden={this.props.queueHidden} queue={this.props.queue} />
+                        </Collapse>
+                        </div>
+                        <h4 onClick={this.props.queueOpenClick} id="queue--button">Q</h4>
                     <h4 onClick={this.props.closeClick} id="close--button">x</h4>
             </div>
         )

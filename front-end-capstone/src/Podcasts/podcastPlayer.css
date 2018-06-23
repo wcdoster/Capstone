@@ -7,6 +7,20 @@
     border-radius: 0 4px 0 0;
 }
 
+#queue--div {
+    position:fixed;
+    bottom:34px;
+    left: 350px;
+    z-index: 100;
+    background-color: white;
+    border-radius: 0 4px 0 0;
+}
+
+
+#queue--list--container {
+    bottom: 34px
+}
+
 .episode--information {
     width: 350px;
     border: 1px solid black;
@@ -42,10 +56,25 @@
     cursor: pointer;
 }
 
-#close--button {
+#queue--button {
     position: fixed;
     bottom: 0;
     left: 350px;
+    padding: 5px 10px 5px 15px;
+    width: 40px;
+    height: 34px;
+    margin: 0;
+    vertical-align: middle;
+    background-color: white;
+    border: 1px black solid;
+    border-left: white;
+    border-radius: 0 4px 0 0;
+}
+
+#close--button {
+    position: fixed;
+    bottom: 0;
+    left: 390px;
     padding: 5px 10px 5px 15px;
     width: 40px;
     height: 34px;

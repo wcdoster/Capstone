@@ -5,6 +5,12 @@
       "username": "wcdoster",
       "email": "wcdoster@gmail.com",
       "password": "password"
+    },
+    {
+      "username": "jordanmykleby",
+      "email": "jmykz@gmail.com",
+      "password": "password",
+      "id": "eQgLysN"
     }
   ],
   "subscribedPodcasts": [
@@ -15,18 +21,8 @@
     },
     {
       "userId": "1",
-      "collectionId": 1043699613,
-      "id": "XxobyEa"
-    },
-    {
-      "userId": "1",
       "collectionId": 917918570,
       "id": "~ayB~Ue"
-    },
-    {
-      "userId": "1",
-      "collectionId": 703889772,
-      "id": "78R0WTm"
     },
     {
       "userId": "1",
@@ -42,6 +38,16 @@
       "userId": "1",
       "collectionId": 201671138,
       "id": "hjiBJEk"
+    },
+    {
+      "userId": "eQgLysN",
+      "collectionId": 1043699613,
+      "id": "zd7j1YD"
+    },
+    {
+      "userId": "eQgLysN",
+      "collectionId": 1375877915,
+      "id": "u0vb~7p"
     }
   ],
   "finishedPodcasts": [
