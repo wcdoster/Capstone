@@ -21,11 +21,6 @@
     },
     {
       "userId": "1",
-      "collectionId": 917918570,
-      "id": "~ayB~Ue"
-    },
-    {
-      "userId": "1",
       "collectionId": 1200361736,
       "id": "ekqtzYs"
     },
@@ -71,6 +66,19 @@
       "title": "MBMBaM 408: Come and Get It!",
       "collectionId": "367330921",
       "rssFeed": "http://mbmbam.libsyn.com/rss"
+    }
+  ],
+  "savedEpisodes": [
+    {
+      "userId": "1",
+      "title": "The Daily Presents “Caliphate,” Chapter 10",
+      "collectionId": 1200361736,
+      "collectionName": "The Daily",
+      "rssFeed": "http://rss.art19.com/the-daily",
+      "imageUrl": "https://content.production.cdn.art19.com/images/01/1b/f3/d6/011bf3d6-a448-4533-967b-e2f19e376480/7fdd4469c1b5cb3b66aa7dcc9fa21f138efe9a0310a8a269f3dcd07c83a552844fcc445ea2d53db1e55d6fb077aeaa8a1566851f8f2d8ac4349d9d23a87a69f5.jpeg",
+      "mediaUrl": "https://dts.podtrac.com/redirect.mp3/rss.art19.com/episodes/ba94ac47-c7ad-45df-9cc1-e3a38faffdde.mp3",
+      "mediaType": "audio/mpeg",
+      "id": "jOkWp38"
     }
   ]
 }

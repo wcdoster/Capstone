@@ -30,7 +30,27 @@ class EpisodeList extends Component {
             <div className="episodeList--div">
                 <h3>Episodes</h3>
                 {this.props.episodes.slice(0, 10).map(p => (
-                    <Episode removeFromQueue={this.props.removeFromQueue} queue={this.props.queue} collectionName={this.props.collectionName} queueHidden={this.props.queueHidden} queueClick={this.props.queueClick} hidden={this.props.hidden} description={this.props.check(this.descriptionType(p.description))} click={this.props.click} episodeName={p.title["#text"]} key={this.uniqueKey++} />
+                    <Episode savedEpisodes={this.props.savedEpisodes}
+                        removeFromQueue={this.props.removeFromQueue}
+                        queue={this.props.queue}
+                        collectionName={this.props.collectionName}
+                        queueHidden={this.props.queueHidden}
+                        queueClick={this.props.queueClick}
+                        hidden={this.props.hidden}
+                        description={this.props.check(this.descriptionType(p.description))}
+                        click={this.props.click}
+                        episodeName={p.title["#text"]}
+                        key={this.uniqueKey++}
+                        collectionId={this.props.collectionId}
+                        rssFeed={this.props.rssFeed}
+                        imageUrl={this.props.image}
+                        mediaUrl={this.props.mediaUrl}
+                        mediaType={this.props.mediaType}
+                        currentUser={this.props.currentUser}
+                        episodeList={this.props.episodes}
+                        currentEpisode={this.props.currentEpisode}
+                        currentlyPlayingPodcast={this.props.currentlyPlayingPodcast}
+                    />
                 ))}
             </div>
         )

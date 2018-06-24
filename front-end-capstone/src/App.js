@@ -32,7 +32,8 @@ class App extends Component {
     description: "",
     queue: [],
     queueHidden: "queue--hidden",
-    queueOpen: false
+    queueOpen: false,
+    savedEpisodes: []
   }
 
   componentDidMount() {
@@ -50,6 +51,13 @@ class App extends Component {
             class: ""
           })
           // this.setView("home")
+        })
+      fetch(`http://localhost:8088/savedEpisodes?userId=${userId}`)
+        .then(r => r.json())
+        .then(results => {
+          this.setState({
+            savedEpisodes: results
+          })
         })
     }
   }
@@ -260,6 +268,11 @@ class App extends Component {
       open: true,
       isPlaying: false
     })
+    let array = this.state.queue
+    array.splice(nextEpisodeIndex, 1)
+    this.setState({
+      queue: array
+    })
     media.pause()
     media.load()
     media.oncanplaythrough = media.play()
@@ -295,16 +308,16 @@ class App extends Component {
     const episodeIndex = this.state.queue.indexOf(this.state.queue.find(thisepisode => {
       return thisepisode.episodeName === episode
     }))
-    if (episodeIndex === thisArray.length-2) {
+    if (episodeIndex === thisArray.length - 2) {
       const end = thisArray.splice(episodeIndex, 1)
       const newArray = thisArray.concat(end)
       this.setState({
         queue: newArray
       })
     }
-    if (episodeIndex !== thisArray.length-1) {
+    if (episodeIndex !== thisArray.length - 1) {
       const item = thisArray.splice(episodeIndex, 1)
-      const beginning = thisArray.splice(0, episodeIndex+1)
+      const beginning = thisArray.splice(0, episodeIndex + 1)
       const newArray = beginning.concat(item, thisArray)
       this.setState({
         queue: newArray
@@ -312,7 +325,7 @@ class App extends Component {
     }
   }.bind(this)
 
-  removeFromQueue = function(e) {
+  removeFromQueue = function (e) {
     const episode = e.target.parentNode.firstChild.id
     const episodeIndex = this.state.queue.indexOf(this.state.queue.find(thisepisode => {
       return thisepisode.episodeName === episode
@@ -326,7 +339,28 @@ class App extends Component {
 
   showMediaPlayer = function () {
     if (this.state.mediaUrl !== "") {
-      return <MediaPlayer removeFromQueue={this.removeFromQueue} moveUp={this.moveUp} moveDown={this.moveDown} clickQueueEpisode={this.clickQueueEpisode} queueHidden={this.state.queueHidden} queueOpen={this.state.queueOpen} queueOpenClick={this.queueOpenClick} queue={this.state.queue} mediaEnd={this.mediaEndCheck} closeClick={this.closeClick} currentUser={this.state.currentUser} episodeName={this.state.episodeName} collectionId={this.state.collectionId} setView={this.setView} imageUrl={this.state.imageUrl} mediaUrl={this.state.mediaUrl} mediaType={this.state.mediaType} name={this.state.collectionName} episodeName={this.state.episodeName} buttonText={this.state.buttonText} mediaPlayerButton={this.mediaPlayerButton} open={this.state.open} />
+      return <MediaPlayer removeFromQueue={this.removeFromQueue}
+        moveUp={this.moveUp}
+        moveDown={this.moveDown}
+        clickQueueEpisode={this.clickQueueEpisode}
+        queueHidden={this.state.queueHidden}
+        queueOpen={this.state.queueOpen}
+        queueOpenClick={this.queueOpenClick}
+        queue={this.state.queue}
+        mediaEnd={this.mediaEndCheck}
+        closeClick={this.closeClick}
+        currentUser={this.state.currentUser}
+        episodeName={this.state.episodeName}
+        collectionId={this.state.collectionId}
+        setView={this.setView}
+        imageUrl={this.state.imageUrl}
+        mediaUrl={this.state.mediaUrl}
+        mediaType={this.state.mediaType}
+        name={this.state.collectionName}
+        episodeName={this.state.episodeName}
+        buttonText={this.state.buttonText}
+        mediaPlayerButton={this.mediaPlayerButton}
+        open={this.state.open} />
     }
   }.bind(this)
 
@@ -407,11 +441,40 @@ class App extends Component {
   showView = function () {
     switch (this.state.view) {
       case "podcastPage":
-        return <PodcastPage removeFromQueue={this.removeFromQueue} queue={this.state.queue} queueClick={this.queueClick} check={this.regexCheck} description={this.state.description} setView={this.setView} class={this.state.class} image={this.state.currentItunesInformation.results[0].artworkUrl600} episodes={this.state.currentPodcast.rss.channel.item} click={this.playButtonClick} name={this.state.currentItunesInformation.results[0].collectionName} currentUser={this.state.currentUser} collectionId={this.state.currentItunesInformation.results[0].collectionId} />
+        return <PodcastPage savedEpisodes={this.state.savedEpisodes}
+          removeFromQueue={this.removeFromQueue}
+          queue={this.state.queue}
+          queueClick={this.queueClick}
+          check={this.regexCheck}
+          description={this.state.description}
+          setView={this.setView}
+          class={this.state.class}
+          image={this.state.currentItunesInformation.results[0].artworkUrl600}
+          episodes={this.state.currentPodcast.rss.channel.item}
+          click={this.playButtonClick}
+          name={this.state.currentItunesInformation.results[0].collectionName}
+          currentUser={this.state.currentUser}
+          collectionId={this.state.currentItunesInformation.results[0].collectionId}
+          rssFeed={this.state.currentItunesInformation.results[0].feedUrl}
+          mediaUrl={this.state.currentItunesInformation}
+          mediaType={this.props.mediaType}
+          currentEpisode={this.state.episodeName}
+          currentlyPlayingPodcast={this.state.collectionName}
+        />
       case "searchResults":
         return <PodcastList searchResults={this.state.searchResults} setView={this.setView} podcastClick={this.podcastClick} />
       case "userPage":
-        return <UserPage key={this.state.timestamp} currentUser={this.state.currentUser} podcastClick={this.podcastClick} xmlToJson={this.xmlToJson} />
+        return <UserPage savedEpisodes={this.state.savedEpisodes}
+          key={this.state.timestamp}
+          currentUser={this.state.currentUser}
+          podcastClick={this.podcastClick}
+          xmlToJson={this.xmlToJson}
+          savedEpisodes={this.state.savedEpisodes}
+          click={this.playButtonClick}
+          queue={this.state.queue}
+          collectionName={this.props.collectionName}
+          queueClick={this.queueClick}
+          removeFromQueue={this.removeFromQueue} />
       case "home":
         return <HomePage podcastClick={this.podcastClick} />
     }
