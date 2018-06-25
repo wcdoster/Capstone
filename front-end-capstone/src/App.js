@@ -288,11 +288,12 @@ class App extends Component {
     if (episodeIndex === 1) {
       const beginning = thisArray.splice(1, 1)
       const newArray = beginning.concat(thisArray)
+      console.log(beginning)
+      console.log(newArray)
       this.setState({
         queue: newArray
       })
-    }
-    if (episodeIndex > 0) {
+    }else if (episodeIndex > 0) {
       const beginning = thisArray.splice(0, newIndex)
       const middle = thisArray.splice(1, 1)
       const newArray = beginning.concat(middle, thisArray)
