@@ -3,6 +3,10 @@ import { Button } from 'react-bootstrap'
 
 class Episode extends Component {
 
+    state= {
+        savedEpisodes: []
+    }
+
 
     returnPlayButton = function () {
         const currentEpisode = this.props.currentEpisode
@@ -54,6 +58,7 @@ class Episode extends Component {
         if (currentUser && thisEpisode === undefined) {
             return <Button onClick={this.saveEpisodeClick}>Save Episode</Button>
         }
+        this.props.renderSave
     }.bind(this)
 
     queueButton = function () {
@@ -64,7 +69,7 @@ class Episode extends Component {
         })
         if (!inQueue && this.props.episodeName !== this.props.currentEpisode) {
             return (<Button onClick={this.props.queueClick}>Add to Queue</Button>)
-        } else if(this.props.episodeName !== this.props.currentEpisode && this.props.currentlyPlayingPodcast !== this.props.collectionName){
+        } else if(this.props.episodeName !== this.props.currentEpisode){
             return (<Button onClick={this.props.removeFromQueue}>Remove From Queue</Button>)
         }
     }.bind(this)
@@ -73,12 +78,9 @@ class Episode extends Component {
         return (
             <div id={this.props.episodeName} >
                 <h4>{this.props.episodeName}</h4>
-
-                {/* <h5>{this.props.length}</h5> */}
                 <p> {this.props.description}</p >
-                {/* <Button hidden={this.props.hidden} onClick={this.props.click}>Play Episode</Button> */}
+
                 {this.returnPlayButton()}
-                {/* <Button hidden={this.props.queueHidden} onClick={this.props.queueClick}>Add to Queue</Button> */}
                 {this.queueButton()}
                 {this.saveEpisode()}
             </div >

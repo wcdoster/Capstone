@@ -126,6 +126,7 @@ class PodcastPage extends Component {
                     episodes={this.props.episodes}
                     click={this.props.click}
                     collectionId={this.props.collectionId}
+                    renderSave={this.props.renderSave}
                     rssFeed={this.props.rssFeed}
                     imageUrl={this.props.imageUrl}
                     mediaUrl={this.props.mediaUrl}

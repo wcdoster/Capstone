@@ -39,6 +39,7 @@ class App extends Component {
   componentDidMount() {
     this.initialView()
     const userId = JSON.parse(localStorage.getItem("userId"))
+    const currentQueue = JSON.parse(localStorage.getItem("queue"))
     if (userId) {
       fetch(`http://localhost:8088/users?id=${userId}`)
         .then(r => r.json())
@@ -59,6 +60,11 @@ class App extends Component {
             savedEpisodes: results
           })
         })
+    }
+    if (currentQueue) {
+      this.setState({
+        queue: currentQueue
+      })
     }
   }
 
@@ -176,15 +182,7 @@ class App extends Component {
     })
   }.bind(this)
 
-
-  podcastClick = function (e) {
-    e.preventDefault()
-    const targetCondition = e.target.parentNode.id || e.target.id
-    if (targetCondition) {
-      this.setState({
-        podcastId: +targetCondition
-      })
-    }
+  fetchRss = function (targetCondition) {
     fetch(`https://itunes.apple.com/lookup?id=${targetCondition}`)
       .then(r => r.json())
       .then(result => {
@@ -218,11 +216,32 @@ class App extends Component {
       })
   }.bind(this)
 
-  // userPagePlayClick = function(e) {
-  //   e.preventDefault
-  //   const currentEpisode = 
-  // }
+  podcastClick = function (e) {
+    e.preventDefault()
+    const targetCondition = e.target.parentNode.id || e.target.id
+    if (targetCondition) {
+      this.setState({
+        podcastId: +targetCondition
+      })
+    }
+    this.fetchRss(targetCondition)
+  }.bind(this)
 
+  viewThisPodcast = function (e) {
+    const objectId = e.target.parentNode.id
+    console.log(objectId)
+    fetch(`http://localhost:8088/savedEpisodes?id=${objectId}`)
+      .then(r => r.json())
+      .then(p => {
+        console.log(p)
+        const result = p[0]
+        this.setState({
+          podcastId: result.collectionId
+        })
+        this.fetchRss(result.collectionId)
+      }
+      )
+  }.bind(this)
 
   playButtonClick = function (e) {
     const currentEpisode = this.state.currentPodcast.rss.channel.item.find(episode => {
@@ -237,6 +256,31 @@ class App extends Component {
       open: true,
       isPlaying: false
     })
+    const media = document.getElementById("mediaPlayer")
+    if (media !== null) {
+      media.pause()
+      media.load()
+      media.oncanplaythrough = media.play()
+    }
+  }.bind(this)
+
+  userPagePlayButtonClick = function (e) {
+    const objectId = e.target.parentNode.id
+    console.log(objectId)
+    fetch(`http://localhost:8088/savedEpisodes?id=${objectId}`)
+      .then(r => r.json())
+      .then(p => {
+        const result = p[0]
+        this.setState({
+          mediaUrl: result.mediaUrl,
+          mediaType: result.mediaType,
+          imageUrl: result.imageUrl,
+          episodeName: result.title,
+          collectionName: result.collectionName,
+          open: true,
+          isPlaying: false
+        })
+      })
     const media = document.getElementById("mediaPlayer")
     if (media !== null) {
       media.pause()
@@ -273,6 +317,7 @@ class App extends Component {
     this.setState({
       queue: array
     })
+    localStorage.setItem("queue", JSON.stringify(array))
     media.pause()
     media.load()
     media.oncanplaythrough = media.play()
@@ -288,18 +333,18 @@ class App extends Component {
     if (episodeIndex === 1) {
       const beginning = thisArray.splice(1, 1)
       const newArray = beginning.concat(thisArray)
-      console.log(beginning)
-      console.log(newArray)
       this.setState({
         queue: newArray
       })
-    }else if (episodeIndex > 0) {
+      localStorage.setItem("queue", JSON.stringify(newArray))
+    } else if (episodeIndex > 0) {
       const beginning = thisArray.splice(0, newIndex)
       const middle = thisArray.splice(1, 1)
       const newArray = beginning.concat(middle, thisArray)
       this.setState({
         queue: newArray
       })
+      localStorage.setItem("queue", JSON.stringify(newArray))
     }
   }.bind(this)
 
@@ -315,6 +360,7 @@ class App extends Component {
       this.setState({
         queue: newArray
       })
+      localStorage.setItem("queue", JSON.stringify(newArray))
     }
     if (episodeIndex !== thisArray.length - 1) {
       const item = thisArray.splice(episodeIndex, 1)
@@ -323,19 +369,24 @@ class App extends Component {
       this.setState({
         queue: newArray
       })
+      localStorage.setItem("queue", JSON.stringify(newArray))
     }
   }.bind(this)
 
   removeFromQueue = function (e) {
-    const episode = e.target.parentNode.firstChild.id
+    const check1 = e.target.parentNode.firstChild.id
+    const check2 = e.target.parentNode.id
+    console.log(check1)
     const episodeIndex = this.state.queue.indexOf(this.state.queue.find(thisepisode => {
-      return thisepisode.episodeName === episode
+      return thisepisode.episodeName === (check1 || check2)
     }))
+    console.log(episodeIndex)
     let array = this.state.queue
     array.splice(episodeIndex, 1)
     this.setState({
       queue: array
     })
+    localStorage.setItem("queue", JSON.stringify(array))
   }.bind(this)
 
   showMediaPlayer = function () {
@@ -395,7 +446,6 @@ class App extends Component {
   }.bind(this)
 
   queueClick = function (e) {
-    console.log("yes")
     const queueEpisode = this.state.currentPodcast.rss.channel.item.find(episode => {
       return episode.title["#text"] === e.target.parentNode.id.toString()
     })
@@ -406,12 +456,35 @@ class App extends Component {
       episodeName: queueEpisode.title["#text"],
       collectionName: this.state.currentItunesInformation.results[0].collectionName
     }
-    console.log(nextEpisode)
     let newQueueArray = this.state.queue
     newQueueArray.push(nextEpisode)
     this.setState({
       queue: newQueueArray
     })
+    localStorage.setItem("queue", JSON.stringify(newQueueArray))
+  }.bind(this)
+
+  queueClickUserPage = function (e) {
+    const objectId = e.target.parentNode.id
+    console.log(objectId)
+    fetch(`http://localhost:8088/savedEpisodes?id=${objectId}`)
+      .then(r => r.json())
+      .then(p => {
+        const result = p[0]
+        const nextEpisode = {
+          mediaUrl: result.mediaUrl,
+          mediaType: result.mediaType,
+          imageUrl: result.imageUrl,
+          episodeName: result.title,
+          collectionName: result.collectionName
+        }
+        let newQueueArray = this.state.queue
+        newQueueArray.push(nextEpisode)
+        this.setState({
+          queue: newQueueArray
+        })
+        localStorage.setItem("queue", JSON.stringify(newQueueArray))
+      })
   }.bind(this)
 
   mediaEndCheck = function () {
@@ -432,6 +505,7 @@ class App extends Component {
         this.setState({
           queue: newQueue
         })
+        localStorage.setItem("queue", JSON.stringify(newQueue))
         media.pause()
         media.load()
         media.oncanplaythrough = media.play()
@@ -439,10 +513,32 @@ class App extends Component {
     }
   }.bind(this)
 
+  renderSave = function () {
+    fetch(`http://localhost:8088/savedEpisodes?userid=${this.state.currentUser}`)
+      .then(r => r.json())
+      .then(results => {
+        console.log(results)
+        this.setState({
+          savedEpisodes: results
+        })
+      })
+  }.bind(this)
+
+  removeSave = function (e) {
+    const episodeId = e.target.parentNode.id
+    fetch(`http://localhost:8088/savedEpisodes/${episodeId}`, {
+      method: 'DELETE'
+    })
+      .then(() => {
+        this.renderSave()
+      })
+  }.bind(this)
+
   showView = function () {
     switch (this.state.view) {
       case "podcastPage":
         return <PodcastPage savedEpisodes={this.state.savedEpisodes}
+          renderSave={this.props.renderSave}
           removeFromQueue={this.removeFromQueue}
           queue={this.state.queue}
           queueClick={this.queueClick}
@@ -463,7 +559,9 @@ class App extends Component {
           currentlyPlayingPodcast={this.state.collectionName}
         />
       case "searchResults":
-        return <PodcastList searchResults={this.state.searchResults} setView={this.setView} podcastClick={this.podcastClick} />
+        return <PodcastList searchResults={this.state.searchResults}
+          setView={this.setView}
+          podcastClick={this.podcastClick} />
       case "userPage":
         return <UserPage savedEpisodes={this.state.savedEpisodes}
           key={this.state.timestamp}
@@ -471,11 +569,13 @@ class App extends Component {
           podcastClick={this.podcastClick}
           xmlToJson={this.xmlToJson}
           savedEpisodes={this.state.savedEpisodes}
-          click={this.playButtonClick}
+          click={this.userPagePlayButtonClick}
           queue={this.state.queue}
           collectionName={this.props.collectionName}
-          queueClick={this.queueClick}
-          removeFromQueue={this.removeFromQueue} />
+          queueClick={this.queueClickUserPage}
+          removeFromQueue={this.removeFromQueue}
+          viewThisPodcast={this.viewThisPodcast}
+          removeSave={this.removeSave} />
       case "home":
         return <HomePage podcastClick={this.podcastClick} />
     }

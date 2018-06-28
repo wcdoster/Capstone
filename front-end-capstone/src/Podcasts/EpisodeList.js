@@ -28,9 +28,10 @@ class EpisodeList extends Component {
     render() {
         return (
             <div className="episodeList--div">
-                <h3>Episodes</h3>
+                <h3>Most Recent Episodes</h3>
                 {this.props.episodes.slice(0, 10).map(p => (
                     <Episode savedEpisodes={this.props.savedEpisodes}
+                        renderSave={this.props.renderSave}
                         removeFromQueue={this.props.removeFromQueue}
                         queue={this.props.queue}
                         collectionName={this.props.collectionName}

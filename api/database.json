@@ -71,14 +71,36 @@
   "savedEpisodes": [
     {
       "userId": "1",
-      "title": "The Daily Presents “Caliphate,” Chapter 10",
+      "title": "MBMBaM 410: Game Man",
+      "collectionId": 367330921,
+      "rssFeed": "http://mbmbam.libsyn.com/rss",
+      "imageUrl": "http://static.libsyn.com/p/assets/d/1/9/c/d19c446dac976966/MBMBAM_Update.jpg",
+      "mediaUrl": "http://traffic.libsyn.com/mbmbam/MyBrotherMyBrotherandMe410.mp3?dest-id=18443",
+      "mediaType": "audio/mpeg",
+      "collectionName": "My Brother, My Brother And Me",
+      "id": 3
+    },
+    {
+      "userId": "1",
+      "title": "The Supreme Court Loses Its Swing Vote",
       "collectionId": 1200361736,
-      "collectionName": "The Daily",
       "rssFeed": "http://rss.art19.com/the-daily",
       "imageUrl": "https://content.production.cdn.art19.com/images/01/1b/f3/d6/011bf3d6-a448-4533-967b-e2f19e376480/7fdd4469c1b5cb3b66aa7dcc9fa21f138efe9a0310a8a269f3dcd07c83a552844fcc445ea2d53db1e55d6fb077aeaa8a1566851f8f2d8ac4349d9d23a87a69f5.jpeg",
-      "mediaUrl": "https://dts.podtrac.com/redirect.mp3/rss.art19.com/episodes/ba94ac47-c7ad-45df-9cc1-e3a38faffdde.mp3",
+      "mediaUrl": "https://dts.podtrac.com/redirect.mp3/rss.art19.com/episodes/07be92e1-a144-451c-9f3e-fe73e5086404.mp3",
       "mediaType": "audio/mpeg",
-      "id": "jOkWp38"
+      "collectionName": "The Daily",
+      "id": 4
+    },
+    {
+      "userId": "1",
+      "title": "The Supreme Court Upholds Trump’s Travel Ban",
+      "collectionId": 1200361736,
+      "rssFeed": "http://rss.art19.com/the-daily",
+      "imageUrl": "https://content.production.cdn.art19.com/images/01/1b/f3/d6/011bf3d6-a448-4533-967b-e2f19e376480/7fdd4469c1b5cb3b66aa7dcc9fa21f138efe9a0310a8a269f3dcd07c83a552844fcc445ea2d53db1e55d6fb077aeaa8a1566851f8f2d8ac4349d9d23a87a69f5.jpeg",
+      "mediaUrl": "https://dts.podtrac.com/redirect.mp3/rss.art19.com/episodes/1024ab60-5f77-44f9-a147-3c89a8b718b3.mp3",
+      "mediaType": "audio/mpeg",
+      "collectionName": "The Daily",
+      "id": 5
     }
   ]
 }

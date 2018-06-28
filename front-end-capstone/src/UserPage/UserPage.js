@@ -89,11 +89,13 @@ class UserPage extends Component {
                 <EpisodeList hidden={true} click={this.props.click} episodes={this.state.finishedPodcasts} /> */}
                         <h2>Saved Episodes</h2>
                         <UserPageEpisodes  
+                        viewThisPodcast={this.props.viewThisPodcast}
                         click={this.props.click} 
                         queue={this.props.queue} 
                         collectionName={this.props.collectionName} 
                         queueClick={this.props.queueClick} 
-                        removeFromQueue={this.props.removeFromQueue}  />
+                        removeFromQueue={this.props.removeFromQueue}
+                        removeSave={this.props.removeSave}  />
                     </Tab>
                     <Tab eventKey={2} title="Top Podcasts">
                         <h2>Top Podcasts</h2>

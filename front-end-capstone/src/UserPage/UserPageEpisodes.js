@@ -8,14 +8,20 @@ class UserPageEpisodes extends Component {
         savedEpisodes: []
     }
 
+    uniqueKey = 1
+
     componentDidMount() {
         const user = localStorage.getItem("userId")
         fetch(`http://localhost:8088/savedEpisodes?userId=${user}`)
         .then(r => r.json())
         .then(results => {
+            // debugger
           this.setState({
             savedEpisodes: results
+          }, () => {
+              console.log(this.state)
           })
+          console.log(results)
         })
     }
 
@@ -32,9 +38,16 @@ class UserPageEpisodes extends Component {
 
     render() {
         return (
-            <div>
+            <div id="user--page--episodes">
                 {this.state.savedEpisodes.map(episode => {
-                    <UserPageEpisode click={this.props.click} queueButton={this.queueButton()} title={episode.title} />
+                    return <UserPageEpisode episodeId={episode.id} 
+                    image={episode.imageUrl} 
+                    name={episode.collectionName} 
+                    viewThisPodcast={this.props.viewThisPodcast} 
+                    click={this.props.click} key={this.uniqueKey++} 
+                    queueButton={this.queueButton()} 
+                    removeSave={this.props.removeSave}
+                    title={episode.title} />
                 })}
             </div>
         )
