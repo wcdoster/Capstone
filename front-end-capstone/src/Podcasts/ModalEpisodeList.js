@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 
-class Episode extends Component {
+class ModalEpisode extends Component {
 
     returnPlayButton = function () {
         const currentEpisode = this.props.currentEpisode
@@ -83,4 +83,4 @@ class Episode extends Component {
     }
 }
 
-export default Episode
+export default ModalEpisode

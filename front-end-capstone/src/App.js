@@ -376,8 +376,11 @@ class App extends Component {
   removeFromQueue = function (e) {
     const check1 = e.target.parentNode.firstChild.id
     const check2 = e.target.parentNode.id
+    const check3 = e.target.id
     const episodeIndex = this.state.queue.indexOf(this.state.queue.find(thisepisode => {
-      return thisepisode.episodeName === (check1 || check2)
+      console.log(thisepisode.episodeName)
+      console.log(check3)
+      return thisepisode.episodeName === (check1 || check2 || check3)
     }))
     let array = this.state.queue
     array.splice(episodeIndex, 1)
@@ -488,6 +491,12 @@ class App extends Component {
     const media = document.getElementById("mediaPlayer")
     if (media) {
       if (media.ended && this.state.queue.length > 0) {
+        const newFinished = {
+          "userId": this.state.currentUser,
+          "title": this.state.episodeName,
+          "collectionId": this.state.collectionId,
+          "rssFeed": this.state.currentItunesInformation.results[0].feedUrl
+        }
         this.setState({
           mediaUrl: this.state.queue[0].mediaUrl,
           mediaType: this.state.queue[0].mediaType,
@@ -501,6 +510,13 @@ class App extends Component {
         newQueue.shift()
         this.setState({
           queue: newQueue
+        })
+        fetch('http://localhost:8088/finishedPodcasts', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(newFinished)
         })
         localStorage.setItem("queue", JSON.stringify(newQueue))
         media.pause()
@@ -571,7 +587,9 @@ class App extends Component {
           queueClick={this.queueClickUserPage}
           removeFromQueue={this.removeFromQueue}
           viewThisPodcast={this.viewThisPodcast}
-          removeSave={this.removeSave} />
+          removeSave={this.removeSave}
+          currentlyPlayingPodcast={this.state.episodeName}
+          currentEpisode={this.state.currentEpisode} />
       case "home":
         return <HomePage podcastClick={this.podcastClick} />
     }

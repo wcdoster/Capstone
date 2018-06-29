@@ -44,7 +44,7 @@ class EpisodeList extends Component {
                         key={this.uniqueKey++}
                         collectionId={this.props.collectionId}
                         rssFeed={this.props.rssFeed}
-                        imageUrl={this.props.image}
+                        image={this.props.image}
                         mediaUrl={this.props.mediaUrl}
                         mediaType={this.props.mediaType}
                         currentUser={this.props.currentUser}

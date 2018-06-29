@@ -21,14 +21,27 @@ class UserPageEpisodes extends Component {
     //     })
     // }
 
-    queueButton = function () {
+    queueButton = function (thisEpisode, thisPodcast) {
+        // debugger
         const inQueue = this.props.queue.find(episode => {
-            return episode.episodeName === this.props.episodeName && episode.collectionName === this.props.collectionName
+            return episode.episodeName === thisEpisode && episode.collectionName === thisPodcast
         })
-        if (!inQueue) {
-            return (<Button onClick={this.props.queueClick}>Add to Queue</Button>)
+        if (thisEpisode !== this.props.currentlyPlayingPodcast) {
+            if (!inQueue) {
+                return (<Button onClick={this.props.queueClick}>Add to Queue</Button>)
+            } else {
+                return (<Button id={thisEpisode} onClick={this.props.removeFromQueue}>Remove From Queue</Button>)
+            }
+        }
+    }.bind(this)
+
+    returnPlayButton = function (episodeName) {
+        const currentPodcast = this.props.currentlyPlayingPodcast
+        // debugger
+        if (episodeName === currentPodcast) {
+            return <Button disabled>Currently Playing</Button>
         } else {
-            return (<Button onClick={this.props.removeFromQueue}>Remove From Queue</Button>)
+            return <Button hidden={this.props.hidden} onClick={this.props.click}>Play Episode</Button>
         }
     }.bind(this)
 
@@ -36,14 +49,15 @@ class UserPageEpisodes extends Component {
         return (
             <div id="user--page--episodes">
                 {this.props.savedEpisodes.map(episode => {
-                    return <UserPageEpisode episodeId={episode.id} 
-                    image={episode.imageUrl} 
-                    name={episode.collectionName} 
-                    viewThisPodcast={this.props.viewThisPodcast} 
-                    click={this.props.click} key={this.uniqueKey++} 
-                    queueButton={this.queueButton()} 
-                    removeSave={this.props.removeSave}
-                    title={episode.title} />
+                    return <UserPageEpisode episodeId={episode.id}
+                        image={episode.imageUrl}
+                        name={episode.collectionName}
+                        viewThisPodcast={this.props.viewThisPodcast}
+                        click={this.props.click} key={this.uniqueKey++}
+                        queueButton={this.queueButton}
+                        removeSave={this.props.removeSave}
+                        title={episode.title}
+                        playButton={this.returnPlayButton} />
                 })}
             </div>
         )

@@ -109,10 +109,11 @@ class PodcastPage extends Component {
                         click={this.props.click}
                         collectionId={this.props.collectionId}
                         rssFeed={this.props.rssFeed}
-                        imageUrl={this.props.imageUrl}
+                        image={this.props.image}
                         mediaUrl={this.props.mediaUrl}
                         mediaType={this.props.mediaType}
                         currentUser={this.props.currentUser}
+                        savedEpisodes={this.props.savedEpisodes}
                     /> */}
                 </div>
                 <EpisodeList savedEpisodes={this.props.savedEpisodes}
@@ -128,7 +129,7 @@ class PodcastPage extends Component {
                     collectionId={this.props.collectionId}
                     renderSave={this.props.renderSave}
                     rssFeed={this.props.rssFeed}
-                    imageUrl={this.props.imageUrl}
+                    image={this.props.image}
                     mediaUrl={this.props.mediaUrl}
                     mediaType={this.props.mediaType}
                     currentUser={this.props.currentUser}
