@@ -3,15 +3,10 @@ import { Button } from 'react-bootstrap'
 
 class Episode extends Component {
 
-    state= {
-        savedEpisodes: []
-    }
-
-
     returnPlayButton = function () {
         const currentEpisode = this.props.currentEpisode
         const currentPodcast = this.props.currentlyPlayingPodcast
-        if(this.props.episodeName === this.props.currentEpisode && this.props.currentlyPlayingPodcast === this.props.collectionName) {
+        if (this.props.episodeName === this.props.currentEpisode && this.props.currentlyPlayingPodcast === this.props.collectionName) {
             return <Button disabled>Currently Playing</Button>
         } else {
             return <Button hidden={this.props.hidden} onClick={this.props.click}>Play Episode</Button>
@@ -22,10 +17,9 @@ class Episode extends Component {
         const episodeName = e.target.parentNode.id
 
         const episodeList = this.props.episodeList
-        const targetEpisode = episodeList.find(episode=>{
+        const targetEpisode = episodeList.find(episode => {
             return episode.title["#text"] === episodeName
         })
-
 
         const newSave = {
             "userId": this.props.currentUser,
@@ -46,19 +40,20 @@ class Episode extends Component {
             },
             body: JSON.stringify(newSave)
         })
+            .then(() => {
+                this.props.renderSave()
+            })
     }.bind(this)
 
     saveEpisode = function () {
         const currentUser = localStorage.getItem("userId")
         const savedEpisodes = this.props.savedEpisodes
-        const thisEpisode = savedEpisodes.find(episode =>{
+        const thisEpisode = savedEpisodes.find(episode => {
             return episode.title === this.props.episodeName && episode.collectionName === this.props.collectionName
         })
-        console.log(thisEpisode)
         if (currentUser && thisEpisode === undefined) {
             return <Button onClick={this.saveEpisodeClick}>Save Episode</Button>
         }
-        this.props.renderSave
     }.bind(this)
 
     queueButton = function () {
@@ -69,7 +64,7 @@ class Episode extends Component {
         })
         if (!inQueue && this.props.episodeName !== this.props.currentEpisode) {
             return (<Button onClick={this.props.queueClick}>Add to Queue</Button>)
-        } else if(this.props.episodeName !== this.props.currentEpisode){
+        } else if (this.props.episodeName !== this.props.currentEpisode) {
             return (<Button onClick={this.props.removeFromQueue}>Remove From Queue</Button>)
         }
     }.bind(this)

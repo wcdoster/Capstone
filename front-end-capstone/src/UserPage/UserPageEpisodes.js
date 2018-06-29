@@ -4,26 +4,22 @@ import UserPageEpisode from './UserPageEpisode'
 
 class UserPageEpisodes extends Component {
 
-    state = {
-        savedEpisodes: []
-    }
-
     uniqueKey = 1
 
-    componentDidMount() {
-        const user = localStorage.getItem("userId")
-        fetch(`http://localhost:8088/savedEpisodes?userId=${user}`)
-        .then(r => r.json())
-        .then(results => {
-            // debugger
-          this.setState({
-            savedEpisodes: results
-          }, () => {
-              console.log(this.state)
-          })
-          console.log(results)
-        })
-    }
+    // componentDidMount() {
+    //     const user = localStorage.getItem("userId")
+    //     fetch(`http://localhost:8088/savedEpisodes?userId=${user}`)
+    //     .then(r => r.json())
+    //     .then(results => {
+    //         // debugger
+    //       this.setState({
+    //         savedEpisodes: results
+    //       }, () => {
+    //           console.log(this.state)
+    //       })
+    //       console.log(results)
+    //     })
+    // }
 
     queueButton = function () {
         const inQueue = this.props.queue.find(episode => {
@@ -39,7 +35,7 @@ class UserPageEpisodes extends Component {
     render() {
         return (
             <div id="user--page--episodes">
-                {this.state.savedEpisodes.map(episode => {
+                {this.props.savedEpisodes.map(episode => {
                     return <UserPageEpisode episodeId={episode.id} 
                     image={episode.imageUrl} 
                     name={episode.collectionName} 

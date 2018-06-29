@@ -21,11 +21,6 @@
     },
     {
       "userId": "1",
-      "collectionId": 1200361736,
-      "id": "ekqtzYs"
-    },
-    {
-      "userId": "1",
       "collectionId": 367330921,
       "id": "zR8vA0Z"
     },
@@ -48,6 +43,16 @@
       "userId": "1",
       "collectionId": 1043699613,
       "id": "Ahx1B8s"
+    },
+    {
+      "userId": "1",
+      "collectionId": 1200361736,
+      "id": "6mLJ_D2"
+    },
+    {
+      "userId": "1",
+      "collectionId": 941907967,
+      "id": "T4lp_j~"
     }
   ],
   "finishedPodcasts": [
@@ -71,36 +76,25 @@
   "savedEpisodes": [
     {
       "userId": "1",
-      "title": "MBMBaM 410: Game Man",
+      "title": "NBA Scuttlebutt, Trump's Rockiest Month, Yanks-Sox, and Teen Culture Watch | The Bill Simmons Podcast (Ep. 382)",
+      "collectionId": 1043699613,
+      "rssFeed": "https://rss.art19.com/the-bill-simmons-podcast",
+      "imageUrl": "https://content.production.cdn.art19.com/images/f3/b2/15/7a/f3b2157a-6c3b-4851-83bb-74a9f9e51acb/032d72a5537ea8cbe4116e2f56c929c3c14ef6f0b6659eee2cd974e394793134ed59a2c3261203ba5f9648fe51af6eda43a11e0590e764b45c45a31391777bc6.jpeg",
+      "mediaUrl": "https://rss.art19.com/episodes/c652f0d3-e598-427e-b109-49014ab1e947.mp3",
+      "mediaType": "audio/mpeg",
+      "collectionName": "The Bill Simmons Podcast",
+      "id": 1
+    },
+    {
+      "userId": "1",
+      "title": "MBMBaM 412: Robocup",
       "collectionId": 367330921,
       "rssFeed": "http://mbmbam.libsyn.com/rss",
-      "imageUrl": "http://static.libsyn.com/p/assets/d/1/9/c/d19c446dac976966/MBMBAM_Update.jpg",
-      "mediaUrl": "http://traffic.libsyn.com/mbmbam/MyBrotherMyBrotherandMe410.mp3?dest-id=18443",
+      "imageUrl": "http://static.libsyn.com/p/assets/d/7/8/0/d78012c8fd1443dc/MBMBAM_Update.jpg",
+      "mediaUrl": "http://traffic.libsyn.com/mbmbam/MyBrotherMyBrotherandMe412.mp3?dest-id=18443",
       "mediaType": "audio/mpeg",
       "collectionName": "My Brother, My Brother And Me",
-      "id": 3
-    },
-    {
-      "userId": "1",
-      "title": "The Supreme Court Loses Its Swing Vote",
-      "collectionId": 1200361736,
-      "rssFeed": "http://rss.art19.com/the-daily",
-      "imageUrl": "https://content.production.cdn.art19.com/images/01/1b/f3/d6/011bf3d6-a448-4533-967b-e2f19e376480/7fdd4469c1b5cb3b66aa7dcc9fa21f138efe9a0310a8a269f3dcd07c83a552844fcc445ea2d53db1e55d6fb077aeaa8a1566851f8f2d8ac4349d9d23a87a69f5.jpeg",
-      "mediaUrl": "https://dts.podtrac.com/redirect.mp3/rss.art19.com/episodes/07be92e1-a144-451c-9f3e-fe73e5086404.mp3",
-      "mediaType": "audio/mpeg",
-      "collectionName": "The Daily",
-      "id": 4
-    },
-    {
-      "userId": "1",
-      "title": "The Supreme Court Upholds Trump’s Travel Ban",
-      "collectionId": 1200361736,
-      "rssFeed": "http://rss.art19.com/the-daily",
-      "imageUrl": "https://content.production.cdn.art19.com/images/01/1b/f3/d6/011bf3d6-a448-4533-967b-e2f19e376480/7fdd4469c1b5cb3b66aa7dcc9fa21f138efe9a0310a8a269f3dcd07c83a552844fcc445ea2d53db1e55d6fb077aeaa8a1566851f8f2d8ac4349d9d23a87a69f5.jpeg",
-      "mediaUrl": "https://dts.podtrac.com/redirect.mp3/rss.art19.com/episodes/1024ab60-5f77-44f9-a147-3c89a8b718b3.mp3",
-      "mediaType": "audio/mpeg",
-      "collectionName": "The Daily",
-      "id": 5
+      "id": 2
     }
   ]
 }

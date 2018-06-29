@@ -12,13 +12,11 @@ class UserPage extends Component {
         subscribedPodcasts: [],
         finishedPodcasts: [],
         inProgressPodcasts: [],
-        savedEpisodes: []
     }
 
 
 
     componentDidMount() {
-        console.log(this.state.savedEpisodes)
         fetch(`http://localhost:8088/subscribedPodcasts?userId=${this.props.currentUser}`)
             .then(r => r.json())
             .then(results => {
@@ -31,7 +29,6 @@ class UserPage extends Component {
                             podcastList.push(podcast)
                             this.setState({
                                 subscribedPodcasts: podcastList,
-                                savedEpisodes: this.props.savedEpisodes
                             })
                         })
                 })
@@ -95,7 +92,8 @@ class UserPage extends Component {
                         collectionName={this.props.collectionName} 
                         queueClick={this.props.queueClick} 
                         removeFromQueue={this.props.removeFromQueue}
-                        removeSave={this.props.removeSave}  />
+                        removeSave={this.props.removeSave}
+                        savedEpisodes={this.props.savedEpisodes}  />
                     </Tab>
                     <Tab eventKey={2} title="Top Podcasts">
                         <h2>Top Podcasts</h2>

@@ -376,11 +376,9 @@ class App extends Component {
   removeFromQueue = function (e) {
     const check1 = e.target.parentNode.firstChild.id
     const check2 = e.target.parentNode.id
-    console.log(check1)
     const episodeIndex = this.state.queue.indexOf(this.state.queue.find(thisepisode => {
       return thisepisode.episodeName === (check1 || check2)
     }))
-    console.log(episodeIndex)
     let array = this.state.queue
     array.splice(episodeIndex, 1)
     this.setState({
@@ -409,7 +407,6 @@ class App extends Component {
         mediaUrl={this.state.mediaUrl}
         mediaType={this.state.mediaType}
         name={this.state.collectionName}
-        episodeName={this.state.episodeName}
         buttonText={this.state.buttonText}
         mediaPlayerButton={this.mediaPlayerButton}
         open={this.state.open} />
@@ -538,7 +535,7 @@ class App extends Component {
     switch (this.state.view) {
       case "podcastPage":
         return <PodcastPage savedEpisodes={this.state.savedEpisodes}
-          renderSave={this.props.renderSave}
+          renderSave={this.renderSave}
           removeFromQueue={this.removeFromQueue}
           queue={this.state.queue}
           queueClick={this.queueClick}
@@ -568,7 +565,6 @@ class App extends Component {
           currentUser={this.state.currentUser}
           podcastClick={this.podcastClick}
           xmlToJson={this.xmlToJson}
-          savedEpisodes={this.state.savedEpisodes}
           click={this.userPagePlayButtonClick}
           queue={this.state.queue}
           collectionName={this.props.collectionName}
