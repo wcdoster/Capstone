@@ -29,7 +29,7 @@ class EpisodeList extends Component {
         return (
             <div className="episodeList--div">
                 <h3>Most Recent Episodes</h3>
-                {this.props.episodes.slice(0, 10).map(p => (
+                {this.props.thisPage.map(p => (
                     <Episode savedEpisodes={this.props.savedEpisodes}
                         renderSave={this.props.renderSave}
                         removeFromQueue={this.props.removeFromQueue}

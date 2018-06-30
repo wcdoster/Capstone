@@ -6,18 +6,21 @@ import PodcastPage from './Podcasts/PodcastPage'
 import MediaPlayer from './Podcasts/PodcastPlayer'
 import HomePage from './HomePage/HomePage'
 import UserPage from './UserPage/UserPage'
+import { Button, Glyphicon } from 'react-bootstrap'
 
 const $ = require('jquery')
 
 class App extends Component {
   state = {
     currentUser: "",
+    currentEpisode: "",
     podcastId: "",
     view: "",
     searchValue: "",
     userName: "",
     searchResults: [],
     currentPodcast: {},
+    episodeList: [],
     currentItunesInformation: {},
     podcastImage: "",
     mediaUrl: "",
@@ -203,9 +206,9 @@ class App extends Component {
           } else {
             thisDescription = desc
           }
-
           this.setState({
             currentPodcast: current,
+            episodeList: current.rss.channel.item,
             currentItunesInformation: result,
             description: thisDescription
           })
@@ -244,10 +247,12 @@ class App extends Component {
   }.bind(this)
 
   playButtonClick = function (e) {
-    const currentEpisode = this.state.currentPodcast.rss.channel.item.find(episode => {
-      return episode.title["#text"] === e.target.parentNode.id.toString()
+    const currentEpisode = this.state.episodeList.find(episode => {
+      console.log(episode.title["#text"])
+      return episode.title["#text"] === e.target.parentNode.id
     })
     this.setState({
+      currentEpisode: currentEpisode.enclosure["@attributes"].url,
       mediaUrl: currentEpisode.enclosure["@attributes"].url,
       mediaType: currentEpisode.enclosure["@attributes"].type,
       imageUrl: this.state.currentItunesInformation.results[0].artworkUrl600,
@@ -273,6 +278,7 @@ class App extends Component {
         const result = p[0]
         this.setState({
           mediaUrl: result.mediaUrl,
+          currentEpisode: result.mediaUrl,
           mediaType: result.mediaType,
           imageUrl: result.imageUrl,
           episodeName: result.title,
@@ -416,6 +422,14 @@ class App extends Component {
     }
   }.bind(this)
 
+  showMediaButton = function (){
+    if(this.state.currentEpisode !== "") {
+      this.setState({
+        mediaUrl: this.state.currentEpisode
+      })
+    }
+  }.bind(this)
+
   mediaPlayerButton = function () {
     this.setState({
       open: !this.state.open,
@@ -446,7 +460,7 @@ class App extends Component {
   }.bind(this)
 
   queueClick = function (e) {
-    const queueEpisode = this.state.currentPodcast.rss.channel.item.find(episode => {
+    const queueEpisode = this.state.episodeList.find(episode => {
       return episode.title["#text"] === e.target.parentNode.id.toString()
     })
     const nextEpisode = {
@@ -560,7 +574,7 @@ class App extends Component {
           setView={this.setView}
           class={this.state.class}
           image={this.state.currentItunesInformation.results[0].artworkUrl600}
-          episodes={this.state.currentPodcast.rss.channel.item}
+          episodes={this.state.episodeList}
           click={this.playButtonClick}
           name={this.state.currentItunesInformation.results[0].collectionName}
           currentUser={this.state.currentUser}
@@ -596,7 +610,6 @@ class App extends Component {
   }.bind(this)
 
 
-
   render() {
     return (
       <div>
@@ -619,6 +632,10 @@ class App extends Component {
         </div>
 
         {this.showMediaPlayer()}
+
+        <Button onClick={this.showMediaButton} id="show--media--button">
+          <Glyphicon glyph="align-justify" />
+        </Button>
 
       </div >
     )

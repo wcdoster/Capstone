@@ -11,6 +11,18 @@
       "email": "jmykz@gmail.com",
       "password": "password",
       "id": "eQgLysN"
+    },
+    {
+      "username": "new",
+      "email": "new@new",
+      "password": "password",
+      "id": "IKNkBDM"
+    },
+    {
+      "username": "j",
+      "email": "j",
+      "password": "j",
+      "id": "B0keAI0"
     }
   ],
   "subscribedPodcasts": [
@@ -74,17 +86,6 @@
     }
   ],
   "savedEpisodes": [
-    {
-      "userId": "1",
-      "title": "The Rampant Problem of Pregnancy Discrimination, Part 2",
-      "collectionId": 1200361736,
-      "rssFeed": "http://rss.art19.com/the-daily",
-      "imageUrl": "https://content.production.cdn.art19.com/images/01/1b/f3/d6/011bf3d6-a448-4533-967b-e2f19e376480/7fdd4469c1b5cb3b66aa7dcc9fa21f138efe9a0310a8a269f3dcd07c83a552844fcc445ea2d53db1e55d6fb077aeaa8a1566851f8f2d8ac4349d9d23a87a69f5.jpeg",
-      "mediaUrl": "https://dts.podtrac.com/redirect.mp3/rss.art19.com/episodes/f39c13cc-1c89-45bc-b707-5145e88592b2.mp3",
-      "mediaType": "audio/mpeg",
-      "collectionName": "The Daily",
-      "id": 6
-    },
     {
       "userId": "1",
       "title": "#123 An Ad for the Worst Day of Your Life",

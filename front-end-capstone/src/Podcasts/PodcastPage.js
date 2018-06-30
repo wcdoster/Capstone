@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Image } from 'react-bootstrap'
+import { Button, Image, Pager } from 'react-bootstrap'
 import EpisodeModal from './EpisodeModal'
 import EpisodeList from './EpisodeList'
 
@@ -9,7 +9,10 @@ class PodcastPage extends Component {
 
     state = {
         subscribed: "",
-        show: false
+        show: false,
+        pages: [],
+        thisPage: [],
+        pageNumber: 0
     }
 
     componentDidMount() {
@@ -26,7 +29,51 @@ class PodcastPage extends Component {
                     })
                 }
             })
+        let newPages = this.state.pages
+        let episodes = this.props.episodes.slice(0)
+        const paginations = episodes.length / 10
+        for (let i = 0; i < paginations; i++) {
+            const theseEpisodes = episodes.splice(0, 10)
+            newPages.push(theseEpisodes)
+            this.setState({
+                pages: newPages,
+                thisPage: newPages[0]
+            })
+        }
     }
+
+    moveForwardButton = function () {
+        if (this.state.pageNumber !== (this.state.pages.length - 1)) {
+            return <Pager.Item onClick={this.moveForward}>Next</Pager.Item>
+        }
+    }.bind(this)
+
+    moveBackButton = function () {
+        if (this.state.pageNumber !== 0) {
+            return <Pager.Item onClick={this.moveBack} >Previous</Pager.Item>
+        }
+    }.bind(this)
+
+    moveForward = function () {
+        const modal = document.getElementById("episode--modal")
+        const newPageNumber = this.state.pageNumber + 1
+        console.log(this.state.pages[newPageNumber])
+        this.setState({
+            thisPage: this.state.pages[newPageNumber],
+            pageNumber: newPageNumber
+        })
+        window.scrollTo(0, 0)
+    }.bind(this)
+
+    moveBack = function () {
+        const modal = document.getElementById("episode--modal")
+        const newPageNumber = this.state.pageNumber - 1
+        this.setState({
+            thisPage: this.state.pages[newPageNumber],
+            pageNumber: newPageNumber
+        })
+        window.scrollTo(0, 0)
+    }.bind(this)
 
     subscribeClick = function () {
         const newSubscription = {
@@ -117,6 +164,7 @@ class PodcastPage extends Component {
                     /> */}
                 </div>
                 <EpisodeList savedEpisodes={this.props.savedEpisodes}
+                    thisPage={this.state.thisPage}
                     removeFromQueue={this.props.removeFromQueue}
                     queue={this.props.queue}
                     collectionName={this.props.name}
@@ -136,6 +184,10 @@ class PodcastPage extends Component {
                     currentEpisode={this.props.currentEpisode}
                     currentlyPlayingPodcast={this.props.currentlyPlayingPodcast}
                 />
+                <Pager>
+                    {this.moveBackButton()}{' '}
+                    {this.moveForwardButton()}
+                </Pager>
             </div >
         )
     }

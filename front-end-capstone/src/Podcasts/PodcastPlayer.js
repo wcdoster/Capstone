@@ -12,29 +12,10 @@ class MediaPlayer extends Component {
         media.oncanplaythrough = media.play()
     }
 
-    // leavingPage = function () {
-    //     const media = document.getElementById("mediaPlayer")
-    //     const newSave = {
-    //         "userId": this.props.currentUser,
-    //         "title": this.props.episodeName,
-    //         "collectionId": this.props.collectionId,
-    //         "timeStop": media.currentTime
-    //     }
-
-    //     fetch("http://localhost:8088/inProgressPodcasts", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify(newSave)
-    //     })
-    // }.bind(this)
-
     render() {
         return (
 
             <div>
-                {/* {this.props.mediaCheck()} */}
                 <div className="mediaPlayer--div">
                     <Collapse in={this.props.open}>
                         <div className="episode--information">
@@ -58,7 +39,6 @@ class MediaPlayer extends Component {
                         <QueueList removeFromQueue={this.props.removeFromQueue} moveUp={this.props.moveUp} moveDown={this.props.moveDown} uniqueKey={this.props.uniqueKey} clickQueueEpisode={this.props.clickQueueEpisode} queueHidden={this.props.queueHidden} queue={this.props.queue} />
                     </Collapse>
                 </div>
-                {/* <h4 onClick={this.props.queueOpenClick} id="queue--button">Q</h4> */}
                 <Button onClick={this.props.queueOpenClick} id="queue--button">
                     <Glyphicon glyph="align-justify" />
                 </Button>
