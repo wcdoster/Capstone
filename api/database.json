@@ -5,24 +5,6 @@
       "username": "wcdoster",
       "email": "wcdoster@gmail.com",
       "password": "password"
-    },
-    {
-      "username": "jordanmykleby",
-      "email": "jmykz@gmail.com",
-      "password": "password",
-      "id": "eQgLysN"
-    },
-    {
-      "username": "new",
-      "email": "new@new",
-      "password": "password",
-      "id": "IKNkBDM"
-    },
-    {
-      "username": "j",
-      "email": "j",
-      "password": "j",
-      "id": "B0keAI0"
     }
   ],
   "subscribedPodcasts": [
@@ -38,33 +20,28 @@
     },
     {
       "userId": "1",
-      "collectionId": 201671138,
-      "id": "hjiBJEk"
-    },
-    {
-      "userId": "eQgLysN",
-      "collectionId": 1043699613,
-      "id": "zd7j1YD"
-    },
-    {
-      "userId": "eQgLysN",
-      "collectionId": 1375877915,
-      "id": "u0vb~7p"
-    },
-    {
-      "userId": "1",
-      "collectionId": 1043699613,
-      "id": "Ahx1B8s"
-    },
-    {
-      "userId": "1",
       "collectionId": 1200361736,
       "id": "6mLJ_D2"
     },
     {
       "userId": "1",
       "collectionId": 941907967,
-      "id": "T4lp_j~"
+      "id": "zVE1XgY"
+    },
+    {
+      "userId": "1",
+      "collectionId": 1111739567,
+      "id": "9qrDN_c"
+    },
+    {
+      "userId": "1",
+      "collectionId": 1375877915,
+      "id": "4Jt02l5"
+    },
+    {
+      "userId": "1",
+      "collectionId": 1043699613,
+      "id": "MyWujIW"
     }
   ],
   "finishedPodcasts": [
@@ -88,25 +65,14 @@
   "savedEpisodes": [
     {
       "userId": "1",
-      "title": "#123 An Ad for the Worst Day of Your Life",
-      "collectionId": 941907967,
-      "rssFeed": "http://feeds.gimletmedia.com/hearreplyall",
-      "imageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/22/0d/f6/220df688-843f-264a-b67e-28644b73c129/source/600x600bb.jpg",
-      "mediaUrl": "https://traffic.megaphone.fm/GLT2783061836.mp3?updated=1529557905",
+      "title": "Show 61 - (Blitz) Painfotainment",
+      "collectionId": 173001861,
+      "rssFeed": "http://feeds.feedburner.com/dancarlin/history?format=xml",
+      "imageUrl": "https://is4-ssl.mzstatic.com/image/thumb/Music71/v4/09/5c/79/095c79d2-17dc-eb92-3f50-ce8b00fc2f4d/source/600x600bb.jpg",
+      "mediaUrl": "http://feedproxy.google.com/~r/dancarlin/history/~5/DtO-_yMG17k/dchha61_Blitz_Painfotainment.mp3",
       "mediaType": "audio/mpeg",
-      "collectionName": "Reply All",
-      "id": 7
-    },
-    {
-      "userId": "1",
-      "title": "649: It's My Party and I'll Try If I Want To",
-      "collectionId": 201671138,
-      "rssFeed": "http://feed.thisamericanlife.org/talpodcast",
-      "imageUrl": "https://is3-ssl.mzstatic.com/image/thumb/Music118/v4/95/90/7d/95907d71-0f30-e954-c56b-279725ee60aa/source/600x600bb.jpg",
-      "mediaUrl": "https://www.podtrac.com/pts/redirect.mp3/podcast.thisamericanlife.org/podcast/649.mp3",
-      "mediaType": "audio/mpeg",
-      "collectionName": "This American Life",
-      "id": 8
+      "collectionName": "Dan Carlin's Hardcore History",
+      "id": 1
     }
   ]
 }

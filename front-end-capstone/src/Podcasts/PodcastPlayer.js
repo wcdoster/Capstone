@@ -29,7 +29,7 @@ class MediaPlayer extends Component {
                             <source src={this.props.mediaUrl} type={this.props.mediaType} />
                         </audio>
                         <h4 onClick={this.props.mediaPlayerButton}>
-                            {this.props.buttonText}
+                            <Glyphicon glyph={this.props.buttonText} />
                         </h4>
                     </div>
 
@@ -42,7 +42,7 @@ class MediaPlayer extends Component {
                 <Button onClick={this.props.queueOpenClick} id="queue--button">
                     <Glyphicon glyph="align-justify" />
                 </Button>
-                <h4 onClick={this.props.closeClick} id="close--button">x</h4>
+                <h4 onClick={this.props.closeClick} id="close--button"><Glyphicon glyph="remove" /></h4>
             </div>
         )
     }

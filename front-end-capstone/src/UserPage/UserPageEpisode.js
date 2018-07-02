@@ -15,8 +15,8 @@ class UserPageEpisode extends Component {
                 {this.props.playButton(this.props.title)}
                 {/* <Button hidden={this.props.queueHidden} onClick={this.props.queueClick}>Add to Queue</Button> */}
                 {this.props.queueButton(this.props.title, this.props.name)}
-                <Button onClick={this.props.viewThisPodcast}>View Podcast</Button>
-                <Button onClick={this.props.removeSave}>Remove</Button>
+                <Button className="view--button" onClick={this.props.viewThisPodcast}>View Podcast</Button>
+                <Button className="remove--button" onClick={this.props.removeSave}>Remove</Button>
             </div>
         )
     }

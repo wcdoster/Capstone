@@ -4,7 +4,8 @@ import PodcastList from '../Podcasts/PodcastList'
 import TopList from '../HomePage/TopList'
 import './userPage.css'
 import { Tabs, Tab } from 'react-bootstrap'
-import UserPageEpisodes from './UserPageEpisodes'
+import UserPageSavedEpisodes from './UserPageSavedEpisodes'
+import UserPageListenNow from './UserPageListenNow'
 // const $ = require('jquery')
 
 class UserPage extends Component {
@@ -84,8 +85,26 @@ class UserPage extends Component {
                         <PodcastList searchResults={this.state.subscribedPodcasts} podcastClick={this.props.podcastClick} />
                         {/* <h2>Most Recent Episodes</h2>
                 <EpisodeList hidden={true} click={this.props.click} episodes={this.state.finishedPodcasts} /> */}
+                        <h2>ListenNow</h2>
+                        <UserPageListenNow
+                        xmlToJson={this.props.xmlToJson}
+                        viewThisPodcast={this.props.viewThisPodcast}
+                        click={this.props.click} 
+                        queue={this.props.queue} 
+                        collectionName={this.props.collectionName} 
+                        queueClick={this.props.queueClick} 
+                        removeFromQueue={this.props.removeFromQueue}
+                        removeSave={this.props.removeSave}
+                        savedEpisodes={this.props.savedEpisodes}
+                        currentlyPlayingPodcast={this.props.currentlyPlayingPodcast}
+                        currentEpisode={this.props.currentEpisode} 
+                        episodeName={this.props.episodeName}
+                        listenNowPlay={this.props.listenNowPlay}
+                        setQueue={this.props.setQueue} 
+                        fetchRss={this.props.fetchRss}/>
+                        
                         <h2>Saved Episodes</h2>
-                        <UserPageEpisodes  
+                        <UserPageSavedEpisodes  
                         viewThisPodcast={this.props.viewThisPodcast}
                         click={this.props.click} 
                         queue={this.props.queue} 

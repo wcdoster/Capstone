@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 import UserPageEpisode from './UserPageEpisode'
 
-class UserPageEpisodes extends Component {
+class UserPageSavedEpisodes extends Component {
 
     uniqueKey = 1
 
@@ -41,7 +41,6 @@ class UserPageEpisodes extends Component {
 
     returnPlayButton = function (episodeName) {
         const currentPodcast = this.props.currentlyPlayingPodcast
-        // debugger
         if (episodeName === currentPodcast) {
             return <Button disabled>Currently Playing</Button>
         } else {
@@ -52,7 +51,7 @@ class UserPageEpisodes extends Component {
     render() {
         return (
             <div id="user--page--episodes">
-                {this.state.savedEpisodes.map(episode => {
+                {this.props.savedEpisodes.map(episode => {
                     return <UserPageEpisode episodeId={episode.id}
                         image={episode.imageUrl}
                         name={episode.collectionName}
@@ -68,4 +67,4 @@ class UserPageEpisodes extends Component {
     }
 }
 
-export default UserPageEpisodes
+export default UserPageSavedEpisodes

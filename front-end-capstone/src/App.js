@@ -31,7 +31,7 @@ class App extends Component {
     timestamp: Date.now(),
     class: "hidden",
     open: false,
-    buttonText: "v",
+    buttonText: "menu-down",
     description: "",
     queue: [],
     queueHidden: "queue--hidden",
@@ -261,6 +261,16 @@ class App extends Component {
       open: true,
       isPlaying: false
     })
+    this.state.queue.map(episode => {
+      if (this.state.episodeName === episode.episodeName) {
+        const episodeIndex = this.state.queue.indexOf(episode)
+        const array = this.state.queue
+        array.splice(episodeIndex,1)
+        this.setState({
+          queue: array
+        })
+      }
+    })
     const media = document.getElementById("mediaPlayer")
     if (media !== null) {
       media.pause()
@@ -286,7 +296,46 @@ class App extends Component {
           open: true,
           isPlaying: false
         })
+        this.state.queue.map(episode => {
+          if (this.state.episodeName === episode.episodeName && this.state.collectionName === episode.collectionName) {
+            const episodeIndex = this.state.queue.indexOf(episode)
+            const array = this.state.queue
+            array.splice(episodeIndex,1)
+            this.setState({
+              queue: array
+            })
+          }
+        })
       })
+    const media = document.getElementById("mediaPlayer")
+    if (media !== null) {
+      media.pause()
+      media.load()
+      media.oncanplaythrough = media.play()
+    }
+  }.bind(this)
+
+  listenNowPlay = function (object) {
+    this.setState({
+      currentEpisode: object.currentEpisode,
+      mediaUrl: object.mediaUrl,
+      mediaType: object.mediaType,
+      imageUrl: object.imageUrl,
+      episodeName: object.episodeName,
+      collectionName: object.collectionName,
+      open: true,
+      isPlaying: false
+    })
+    this.state.queue.map(episode => {
+      if (this.state.episodeName === episode.episodeName && this.state.collectionName === episode.collectionName) {
+        const episodeIndex = this.state.queue.indexOf(episode)
+        const array = this.state.queue
+        array.splice(episodeIndex,1)
+        this.setState({
+          queue: array
+        })
+      }
+    })
     const media = document.getElementById("mediaPlayer")
     if (media !== null) {
       media.pause()
@@ -301,6 +350,7 @@ class App extends Component {
     })
   }.bind(this)
 
+
   clickQueueEpisode = function (e) {
     const media = document.getElementById("mediaPlayer")
     const nextEpisodeName = e.target.id
@@ -308,7 +358,6 @@ class App extends Component {
       return episode.episodeName === nextEpisodeName
     }))
     const nextEpisode = this.state.queue[nextEpisodeIndex]
-    console.log(nextEpisode)
     this.setState({
       mediaUrl: nextEpisode.mediaUrl,
       mediaType: nextEpisode.mediaType,
@@ -422,8 +471,8 @@ class App extends Component {
     }
   }.bind(this)
 
-  showMediaButton = function (){
-    if(this.state.currentEpisode !== "") {
+  showMediaButton = function () {
+    if (this.state.currentEpisode !== "") {
       this.setState({
         mediaUrl: this.state.currentEpisode
       })
@@ -436,11 +485,11 @@ class App extends Component {
     })
     if (this.state.open === true) {
       this.setState({
-        buttonText: "^",
+        buttonText: "menu-up",
       })
     } else {
       this.setState({
-        buttonText: "v",
+        buttonText: "menu-down",
       })
     }
   }.bind(this)
@@ -459,16 +508,13 @@ class App extends Component {
     }
   }.bind(this)
 
-  queueClick = function (e) {
-    const queueEpisode = this.state.episodeList.find(episode => {
-      return episode.title["#text"] === e.target.parentNode.id.toString()
-    })
+  setQueue = function (episode) {
     const nextEpisode = {
-      mediaUrl: queueEpisode.enclosure["@attributes"].url,
-      mediaType: queueEpisode.enclosure["@attributes"].type,
-      imageUrl: this.state.currentItunesInformation.results[0].artworkUrl600,
-      episodeName: queueEpisode.title["#text"],
-      collectionName: this.state.currentItunesInformation.results[0].collectionName
+      mediaUrl: episode.mediaUrl,
+      mediaType: episode.mediaType,
+      imageUrl: episode.imageUrl,
+      episodeName: episode.episodeName,
+      collectionName: episode.collectionName
     }
     let newQueueArray = this.state.queue
     newQueueArray.push(nextEpisode)
@@ -476,6 +522,21 @@ class App extends Component {
       queue: newQueueArray
     })
     localStorage.setItem("queue", JSON.stringify(newQueueArray))
+  }.bind(this)
+
+  queueClick = function (e) {
+    const queueEpisode = this.state.episodeList.find(episode => {
+      return episode.title["#text"] === e.target.parentNode.id.toString()
+    })
+    const episode = {
+      mediaUrl: queueEpisode.enclosure["@attributes"].url,
+      mediaType: queueEpisode.enclosure["@attributes"].type,
+      imageUrl: this.state.currentItunesInformation.results[0].artworkUrl600,
+      episodeName: queueEpisode.title["#text"],
+      collectionName: this.state.currentItunesInformation.results[0].collectionName
+    }
+    this.setQueue(episode)
+
   }.bind(this)
 
   queueClickUserPage = function (e) {
@@ -544,6 +605,7 @@ class App extends Component {
     fetch(`http://localhost:8088/savedEpisodes?userid=${this.state.currentUser}`)
       .then(r => r.json())
       .then(results => {
+
         console.log(results)
         this.setState({
           savedEpisodes: results
@@ -603,7 +665,11 @@ class App extends Component {
           viewThisPodcast={this.viewThisPodcast}
           removeSave={this.removeSave}
           currentlyPlayingPodcast={this.state.episodeName}
-          currentEpisode={this.state.currentEpisode} />
+          currentEpisode={this.state.currentEpisode}
+          xmlToJson={this.xmlToJson}
+          listenNowPlay={this.listenNowPlay}
+          setQueue={this.setQueue}
+          fetchRss={this.fetchRss} />
       case "home":
         return <HomePage podcastClick={this.podcastClick} />
     }
@@ -634,7 +700,7 @@ class App extends Component {
         {this.showMediaPlayer()}
 
         <Button onClick={this.showMediaButton} id="show--media--button">
-          <Glyphicon glyph="align-justify" />
+          <Glyphicon glyph="chevron-right" />
         </Button>
 
       </div >

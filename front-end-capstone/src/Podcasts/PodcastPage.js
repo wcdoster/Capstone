@@ -140,28 +140,6 @@ class PodcastPage extends Component {
                     <h2>{this.props.name}</h2>
                     <h5>{this.props.check(this.props.description)}</h5>
                     <Button className={this.props.class} onClick={this.clickFunction} >{this.state.subscribed}</Button>
-                    <Button onClick={this.modalShow} >View All Episodes</Button>
-                    {/* <EpisodeModal
-                        handleClose={this.handleClose}
-                        show={this.state.show}
-                        saveEpisode={this.props.saveEpisode}
-                        removeFromQueue={this.props.removeFromQueue}
-                        queue={this.props.queue}
-                        collectionName={this.props.name}
-                        queueHidden={this.props.queueHidden}
-                        queueClick={this.props.queueClick}
-                        check={this.props.check}
-                        hidden={this.state.hidden}
-                        episodes={this.props.episodes}
-                        click={this.props.click}
-                        collectionId={this.props.collectionId}
-                        rssFeed={this.props.rssFeed}
-                        image={this.props.image}
-                        mediaUrl={this.props.mediaUrl}
-                        mediaType={this.props.mediaType}
-                        currentUser={this.props.currentUser}
-                        savedEpisodes={this.props.savedEpisodes}
-                    /> */}
                 </div>
                 <EpisodeList savedEpisodes={this.props.savedEpisodes}
                     thisPage={this.state.thisPage}
