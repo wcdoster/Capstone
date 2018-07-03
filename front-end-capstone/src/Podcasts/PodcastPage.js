@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Image, Pager } from 'react-bootstrap'
+import { Button, Image, Pager, Glyphicon } from 'react-bootstrap'
 import EpisodeModal from './EpisodeModal'
 import EpisodeList from './EpisodeList'
 
@@ -134,6 +134,8 @@ class PodcastPage extends Component {
     render() {
         return (
             <div className="podcastPage--div">
+
+            {/* <Glyphicon className="back--arrow" onClick={this.props.setView("search")} glyph="arrow-left" /> */}
                 {/* <Button onClick={this.props.setView("searchResults")} id="page--back--button">Back</Button> */}
                 <div className="podcastPage--info">
                     <Image src={this.props.image} />

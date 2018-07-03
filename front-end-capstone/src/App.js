@@ -126,7 +126,8 @@ class App extends Component {
   logout = function () {
     this.setState({
       currentUser: "",
-      userName: ""
+      userName: "",
+      queue: []
     })
     localStorage.clear()
     this.setView("home")
@@ -281,7 +282,6 @@ class App extends Component {
 
   userPagePlayButtonClick = function (e) {
     const objectId = e.target.parentNode.id
-    console.log(objectId)
     fetch(`http://localhost:8088/savedEpisodes?id=${objectId}`)
       .then(r => r.json())
       .then(p => {

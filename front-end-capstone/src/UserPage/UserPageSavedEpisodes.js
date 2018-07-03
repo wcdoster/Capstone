@@ -18,10 +18,7 @@ class UserPageSavedEpisodes extends Component {
             // debugger
           this.setState({
             savedEpisodes: results
-          }, () => {
-              console.log(this.state)
           })
-          console.log(results)
         })
     }
 

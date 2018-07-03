@@ -85,7 +85,7 @@ class UserPage extends Component {
                         <PodcastList searchResults={this.state.subscribedPodcasts} podcastClick={this.props.podcastClick} />
                         {/* <h2>Most Recent Episodes</h2>
                 <EpisodeList hidden={true} click={this.props.click} episodes={this.state.finishedPodcasts} /> */}
-                        <h2>ListenNow</h2>
+                        <h2>Listen Now</h2>
                         <UserPageListenNow
                         xmlToJson={this.props.xmlToJson}
                         viewThisPodcast={this.props.viewThisPodcast}

@@ -15,11 +15,6 @@
     },
     {
       "userId": "1",
-      "collectionId": 367330921,
-      "id": "zR8vA0Z"
-    },
-    {
-      "userId": "1",
       "collectionId": 1200361736,
       "id": "6mLJ_D2"
     },
@@ -35,13 +30,13 @@
     },
     {
       "userId": "1",
-      "collectionId": 1375877915,
-      "id": "4Jt02l5"
+      "collectionId": 1043699613,
+      "id": "MyWujIW"
     },
     {
       "userId": "1",
-      "collectionId": 1043699613,
-      "id": "MyWujIW"
+      "collectionId": 367330921,
+      "id": "6EldMNB"
     }
   ],
   "finishedPodcasts": [
@@ -65,14 +60,25 @@
   "savedEpisodes": [
     {
       "userId": "1",
-      "title": "Show 61 - (Blitz) Painfotainment",
+      "title": "Show 55 - Blueprint for Armageddon VI",
       "collectionId": 173001861,
       "rssFeed": "http://feeds.feedburner.com/dancarlin/history?format=xml",
       "imageUrl": "https://is4-ssl.mzstatic.com/image/thumb/Music71/v4/09/5c/79/095c79d2-17dc-eb92-3f50-ce8b00fc2f4d/source/600x600bb.jpg",
-      "mediaUrl": "http://feedproxy.google.com/~r/dancarlin/history/~5/DtO-_yMG17k/dchha61_Blitz_Painfotainment.mp3",
+      "mediaUrl": "http://feedproxy.google.com/~r/dancarlin/history/~5/ImZWQDdAmi4/dchha55_Blueprint_for_Armageddon_VI.mp3",
       "mediaType": "audio/mpeg",
       "collectionName": "Dan Carlin's Hardcore History",
       "id": 1
+    },
+    {
+      "userId": "1",
+      "title": "MBMBaM 412: Robocup",
+      "collectionId": 367330921,
+      "rssFeed": "http://mbmbam.libsyn.com/rss",
+      "imageUrl": "https://is2-ssl.mzstatic.com/image/thumb/Music62/v4/9d/1f/8a/9d1f8ac7-645e-c74e-89e2-7631d0a6c520/source/600x600bb.jpg",
+      "mediaUrl": "http://traffic.libsyn.com/mbmbam/MyBrotherMyBrotherandMe412.mp3?dest-id=18443",
+      "mediaType": "audio/mpeg",
+      "collectionName": "My Brother, My Brother And Me",
+      "id": 2
     }
   ]
 }

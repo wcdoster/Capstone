@@ -21,7 +21,6 @@ class UserPageListenNow extends Component {
                 // debugger
                 const episodes = []
                 results.forEach(result => {
-                    console.log(result)
                     fetch(`https://itunes.apple.com/lookup?id=${result.collectionId}`)
                         .then(r => r.json())
                         .then(p => {
