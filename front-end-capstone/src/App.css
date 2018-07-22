@@ -36,3 +36,14 @@ NavBar {
 #content {
   padding-top: 55px;
 }
+
+#show--media--button {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+}
+
+.hidden {
+  display: none;
+}

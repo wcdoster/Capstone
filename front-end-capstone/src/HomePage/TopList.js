@@ -10,7 +10,7 @@ class TopList extends Component {
     }
 
     componentDidMount() {
-        fetch('https://rss.itunes.apple.com/api/v1/us/podcasts/top-podcasts/all/25/explicit.json')
+        fetch('https://rss.itunes.apple.com/api/v1/us/podcasts/top-podcasts/all/50/explicit.json')
             .then(r => r.json())
             .then(x => {
     

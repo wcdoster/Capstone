@@ -15,33 +15,33 @@
     },
     {
       "userId": "1",
-      "collectionId": 1043699613,
-      "id": "XxobyEa"
-    },
-    {
-      "userId": "1",
-      "collectionId": 917918570,
-      "id": "~ayB~Ue"
-    },
-    {
-      "userId": "1",
-      "collectionId": 703889772,
-      "id": "78R0WTm"
-    },
-    {
-      "userId": "1",
       "collectionId": 1200361736,
-      "id": "ekqtzYs"
+      "id": "6mLJ_D2"
+    },
+    {
+      "userId": "1",
+      "collectionId": 941907967,
+      "id": "zVE1XgY"
+    },
+    {
+      "userId": "1",
+      "collectionId": 1043699613,
+      "id": "MyWujIW"
     },
     {
       "userId": "1",
       "collectionId": 367330921,
-      "id": "zR8vA0Z"
+      "id": "6EldMNB"
     },
     {
       "userId": "1",
-      "collectionId": 201671138,
-      "id": "hjiBJEk"
+      "collectionId": 1111739567,
+      "id": "cYB4Gbc"
+    },
+    {
+      "userId": "1",
+      "collectionId": 1243247464,
+      "id": "_Mpu~UB"
     }
   ],
   "finishedPodcasts": [
@@ -60,6 +60,52 @@
       "title": "MBMBaM 408: Come and Get It!",
       "collectionId": "367330921",
       "rssFeed": "http://mbmbam.libsyn.com/rss"
+    }
+  ],
+  "savedEpisodes": [
+    {
+      "userId": "1",
+      "title": "'The Devil Wears Prada' With Bill Simmons, Juliet Litman, and Amanda Dobbins",
+      "collectionId": 1268527882,
+      "rssFeed": "http://feeds.feedburner.com/therewatchables",
+      "imageUrl": "https://is5-ssl.mzstatic.com/image/thumb/Music118/v4/20/5d/f3/205df39c-5bd4-35ff-e917-8da280e77585/source/600x600bb.jpg",
+      "mediaUrl": "https://rss.art19.com/episodes/445ec7c2-4026-4734-b88e-0f74b908f4f4.mp3",
+      "mediaType": "audio/mpeg",
+      "collectionName": "The Rewatchables",
+      "id": 3
+    },
+    {
+      "userId": "1",
+      "title": "Show 55 - Blueprint for Armageddon VI",
+      "collectionId": 173001861,
+      "rssFeed": "http://feeds.feedburner.com/dancarlin/history?format=xml",
+      "imageUrl": "https://is4-ssl.mzstatic.com/image/thumb/Music71/v4/09/5c/79/095c79d2-17dc-eb92-3f50-ce8b00fc2f4d/source/600x600bb.jpg",
+      "mediaUrl": "http://feedproxy.google.com/~r/dancarlin/history/~5/ImZWQDdAmi4/dchha55_Blueprint_for_Armageddon_VI.mp3",
+      "mediaType": "audio/mpeg",
+      "collectionName": "Dan Carlin's Hardcore History",
+      "id": 4
+    },
+    {
+      "userId": "1",
+      "title": "Assigning Blame in the Opioid Epidemic",
+      "collectionId": 1200361736,
+      "rssFeed": "http://rss.art19.com/the-daily",
+      "imageUrl": "https://is4-ssl.mzstatic.com/image/thumb/Music122/v4/1b/83/76/1b8376aa-90a9-eae1-662d-2b24faf1bf6e/source/600x600bb.jpg",
+      "mediaUrl": "https://dts.podtrac.com/redirect.mp3/rss.art19.com/episodes/0a80734d-7a5f-40a7-aa86-b501f023490a.mp3",
+      "mediaType": "audio/mpeg",
+      "collectionName": "The Daily",
+      "id": 15
+    },
+    {
+      "userId": "1",
+      "title": "HP Extra: The Wizarding World of Harry Potter | Harry Potter",
+      "collectionId": 1243247464,
+      "rssFeed": "http://feeds.feedburner.com/bingemode",
+      "imageUrl": "https://is4-ssl.mzstatic.com/image/thumb/Music125/v4/ff/4e/26/ff4e26d3-d0d6-247b-79ae-5db188509209/source/600x600bb.jpg",
+      "mediaUrl": "http://feedproxy.google.com/~r/BingeMode/~5/AuSFJudIYl4/1ce6d822-49e7-49fb-b973-15bcad6fd163.mp3",
+      "mediaType": "audio/mpeg",
+      "collectionName": "Binge Mode: Harry Potter",
+      "id": 16
     }
   ]
 }

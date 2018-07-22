@@ -46,7 +46,7 @@ class Login extends Component {
                 onChange={this.handleFormFieldChange}
                 placeholder="username" />
 
-                <FormControl type="text"
+                <FormControl type="password"
                 id="password"
                 value={this.state.password}
                 onChange={this.handleFormFieldChange}
